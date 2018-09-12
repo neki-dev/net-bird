@@ -1,0 +1,15 @@
+AddDefaultCharset UTF-8
+
+Options -Indexes
+
+RewriteEngine on
+RewriteBase /
+
+RewriteRule ^(.*)(/)$ $1 [L,R=301]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+RewriteRule ^(?!template/combine)(.*)$ index.php?route=$1 [QSA,L]
+
+RewriteRule ^template/combine/(.*)\.(css|js)$ /application/combine.php?type=$2&assets=$1

@@ -1,0 +1,225 @@
+form {
+	display: block;
+}
+form * {
+	font: 12px 'Lucida Grande', 'Arial', 'Tahoma', 'Verdana', 'Sans-serif';
+	outline: none;
+}
+
+form input[type='range'] {
+	width: 300px;
+	margin-bottom: 10px;
+	box-sizing: border-box;
+}
+form input[type='text'],
+form input[type='number'],
+form input[type='email'],
+form input[type='password'],
+form input[type='url'],
+form input[type='date'],
+form textarea,
+form select {
+	border: 1px solid #dfdfdf;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	background: #fff;
+	color: #777;
+	padding: 12px 23px;
+	display: block;
+	box-sizing: border-box;
+	width: 300px;
+	margin-bottom: 10px;
+	font-size: 14px;
+	-webkit-appearance: none;
+}
+form input[type='text']:disabled,
+form input[type='number']:disabled,
+form input[type='email']:disabled,
+form input[type='password']:disabled,
+form input[type='url']:disabled,
+form input[type='date']:disabled,
+form textarea:disabled,
+form select:disabled {
+	background: #fafafa;
+}
+form input[type='text']:focus,
+form input[type='number']:focus,
+form input[type='email']:focus,
+form input[type='password']:focus,
+form input[type='url']:focus,
+form input[type='date']:focus,
+form textarea:focus,
+form select:focus {
+	border-color: #aaa;
+}
+form input[type='text'].noborder,
+form input[type='number'].noborder,
+form input[type='email'].noborder,
+form input[type='password'].noborder,
+form input[type='url'].noborder,
+form input[type='date'].noborder,
+form textarea.noborder,
+form select.noborder {
+	border: none;
+	padding: 13px 24px;
+}
+form input[type='text'].noborder:focus,
+form input[type='number'].noborder:focus,
+form input[type='email'].noborder:focus,
+form input[type='password'].noborder:focus,
+form input[type='url'].noborder:focus,
+form input[type='date'].noborder:focus,
+form textarea.noborder:focus,
+form select.noborder:focus {
+	box-shadow: 0 0 7px rgba(255,255,255,0.6);
+}
+form input[type='text'].error,
+form input[type='number'].error,
+form input[type='email'].error,
+form input[type='password'].error,
+form input[type='url'].error,
+form input[type='date'].error,
+form textarea.error,
+form select.error {
+	color: #DB4444;
+}
+form .error::-webkit-input-placeholder {
+	color: #c0392b;
+}
+form .error::-moz-placeholder {
+	color: #c0392b;
+}
+form .error:-moz-placeholder {
+	color: #c0392b;
+}
+form .error:-ms-input-placeholder {
+	color: #c0392b;
+}
+form textarea {
+	resize: vertical;
+	width: 500px;
+	min-height: 100px;
+	max-height: 300px;
+	line-height: 18px;
+}
+form textarea.static {
+	resize: none;
+	height: 100px;
+}
+form select {
+	padding: 9px 10px;
+	width: 232px;
+}
+
+form button {
+	border: none;
+	-moz-border-radius: 24px;
+	-webkit-border-radius: 24px;
+	border-radius: 24px;
+	/*display: block;*/
+	font-weight: bold;
+	background: #2887a7;
+	box-shadow: 0 5px 10px rgba(31,109,135,0.5);
+	color: #fff;
+	padding: 13px 24px;
+	font-size: 14px;
+	letter-spacing: 1px;
+	margin: 15px 10px 0 0;
+}
+form button.outline {
+	background: none;
+	border: 1px solid #bbb;
+	padding: 12px 23px;
+	box-shadow: none;
+	color: #aaa;
+}
+form button:hover {
+	background-image: linear-gradient(to bottom, #31a2c8, #2c94b7, #2887a7, #237a97, #1f6d87);
+	color: #fff;
+	cursor: pointer;
+}
+form button.outline:hover {
+	background: none;
+	border-color: #999;
+	color: #888;
+}
+
+form .input-title {
+	font-weight: bold;
+	margin: 15px 0 5px 7px;
+	color: #888;
+	font-size: 11px;
+}
+
+form .checkbox {
+	overflow: hidden;
+	margin: 12px 0;
+}
+form .checkbox input {
+	float: left;
+}
+form .checkbox span {
+	float: left;
+	margin-left: 5px;
+	font-weight: bold;
+	color: #666;
+}
+
+form .form-success,
+form .form-error {
+	border-left: 5px solid transparent;
+	display: block;
+	padding: 13px 19px;
+	font-weight: bold;
+	margin-bottom: 10px;
+	color: #fff;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	max-width: 500px;
+	box-sizing: border-box;
+}
+form .form-success {
+	border-color: #1a691c;
+	background: #222 url('/template/images/form-success.png') left top no-repeat;
+}
+form .form-error {
+	border-color: #AD0000;
+	background: #222 url('/template/images/form-error.png') left top no-repeat;
+}
+
+form .input-file {
+	box-sizing: border-box;
+	-moz-border-radius: 2px;
+	-webkit-border-radius: 2px;
+	border-radius: 2px;
+	width: 300px;
+	margin-bottom: 10px;
+	border: 1px dashed #ddd;
+	overflow: hidden;
+	padding: 14px 20px;
+}
+form .input-file input[type=file],
+form .input-file input[type=text] {
+	display: none;
+}
+form .input-file span.status {
+	color: #aaa;
+	float: left;
+	max-width: 200px;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+}
+form .input-file a.upload,
+form .input-file a.delete {
+	float: right;
+	text-decoration: none;
+	color: #3CB015;
+	margin-left: 5px;
+}
+form .input-file a.delete {
+	color: #BF3424;
+	display: none;
+}

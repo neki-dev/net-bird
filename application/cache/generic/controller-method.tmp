@@ -1,0 +1,7 @@
+	public function %method%(%args%) {
+
+		return [];
+
+	}
+
+#?method-generate

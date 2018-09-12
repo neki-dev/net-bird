@@ -1,0 +1,114 @@
+body {
+	font: 14px 'Lucida Grande', 'Arial', 'Tahoma', 'Verdana', 'Sans-serif';
+	position: relative;
+}
+body.dark {
+	background: #1B1C18;
+	color: #fff;
+}
+
+.frame {
+	padding: 30px;
+}
+.frame .code {
+	overflow-x: auto;
+	background: #23241f;
+	margin-top: 20px;
+	position: relative;
+	border-radius: 3px;
+}
+.frame .code .lines {
+	position: absolute;
+	top: 8px;
+	left: 11px;
+	color: #666;
+}
+.frame .code .lines span {
+	display: block;
+}
+.frame .code .lines span.active {
+	background: #E33922;
+	color: #fff;
+}
+.frame .code pre {
+	margin: 0;
+	padding: 0;
+}
+.frame .code pre code {
+	margin: 0 0 0 40px;
+	overflow: hidden;
+	display: inline-block;
+	counter-reset: line;
+}
+.frame .code pre code * {
+	counter-increment: line;
+}
+
+.file {
+	margin: 0 0 15px 0;
+}
+
+.message {
+	background: #eee;
+	color: #222;
+	padding: 20px;
+	border-radius: 3px;
+	box-shadow: 0 5px 25px #000;
+}
+.message h3 {
+	font-size: 14px;
+	line-height: 14px;
+	color: #E33922;
+	margin: 0 0 5px 0;
+}
+.message span {
+	font-size: 24px;
+	font-weight: bold;
+}
+
+.item {
+	margin: 20px 0 0 0;
+}
+.item b {
+	font-weight: 100;
+	display: block;
+	margin: 0 0 10px 0;
+	color: #888;
+}
+
+.tabs-toggle {
+	margin-top: 20px;
+}
+.tabs-toggle > span {
+	color: #888;
+	margin-right: 8px;
+	display: inline-block;
+}
+.tabs-toggle > span.active {
+	color: #fff;
+}
+.tabs-toggle > span:not(.active):hover {
+	cursor: pointer;
+	color: #fff;
+}
+.tabs-container {
+	margin-top: 12px;
+}
+.tabs-container > div {
+	display: none;
+}
+.tabs-container > div.active {
+	display: block;
+}
+
+.backtrace-list {
+	color: #777;
+}
+.backtrace-list > span {
+	color: #fff;
+	letter-spacing: 1px;
+}
+.backtrace-list > span i {
+	color: #aaa;
+	font-style: normal;
+}

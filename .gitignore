@@ -1,0 +1,11 @@
+/application/cache/assets/*
+/application/cache/debug/*
+/application/cache/uploads/*
+/application/cache/template/*
+/application/classes/extra/*
+/application/classes/*.locked
+/application/vendor/*
+/.conf
+/composer.phar
+/composer.lock
+/debug.php

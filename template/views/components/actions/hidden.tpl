@@ -1,0 +1,1 @@
+<input type='text' value='{{ data.value }}' name='{{ name }}' style='display:none;' />

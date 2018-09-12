@@ -1,0 +1,15 @@
+<?php
+
+class Controller extends Application\BaseController {
+
+	public function __onControllerLoad() : void {
+	}
+
+	public function __onPrevent(string $url, string $method) : bool {
+		return true;
+	}
+
+#?method-generate
+
+}
+

@@ -1,0 +1,12 @@
+	public function %method%() : array {
+		return [
+			'scheme' => [],
+			'callback' => function(array $data) {
+
+				return Action::result(true, 'success', '/redirect');
+
+			}
+		];
+	}
+
+#?method-generate

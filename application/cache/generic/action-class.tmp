@@ -1,0 +1,11 @@
+<?php
+
+namespace Action;
+
+use App\Action;
+
+class Controller extends \App\BaseController {
+
+#?method-generate
+
+}

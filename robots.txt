@@ -1,0 +1,5 @@
+User-Agent: *
+Allow: /
+Disallow: /index.php$
+Disallow: /template/
+Disallow: /application/

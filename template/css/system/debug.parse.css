@@ -1,0 +1,53 @@
+.debug-parse {
+	border: 1px solid rgba(255,255,255,0.1);
+	color: #fff;
+	font-size: 12px;
+	display: block;
+	padding: 20px;
+	border-radius: 3px;
+}
+.debug-parse-item {
+	color: #aaa;
+	font-size: 11px;
+}
+.debug-parse .array .key {
+	margin-left: 20px;
+}
+.debug-parse .array .key .sk {
+	color: #B3FFFF;
+}
+.debug-parse .array .key .sd {
+	color: #fff;
+	font-size: 11px;
+}
+.debug-parse .array .key .sv {
+	color: #F9FFB3;
+}
+
+.debug-print {
+	border-radius: 0;
+	position: absolute;
+	z-index: 9998;
+	left: 0;
+	right: 0;
+	top: 0;
+	box-shadow: 0 0 15px rgba(0,0,0,0.3);
+}
+.debug-print .debug-parse {
+	border-radius: 0;
+	padding: 10px;
+	background: #222;
+}
+
+.debug-toggle {
+	right: 10px;
+	top: 10px;
+	position: absolute;
+	z-index: 9999;
+}
+.debug-toggle ~ .debug-print {
+   display: none;
+}
+.debug-toggle:checked ~ .debug-print {
+   display: block;
+}
