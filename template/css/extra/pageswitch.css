@@ -1,9 +1,9 @@
-.pags-list {
+.pageswitch-list {
 	overflow: hidden;
 	margin-top: 10px;
 }
-.pags-list a,
-.pags-list span {
+.pageswitch-list a,
+.pageswitch-list span {
 	display: inline-block;
 	width: 30px;
 	background: #ddd;
@@ -14,16 +14,16 @@
 	border-radius: 15px;
 	margin-right: 3px;
 }
-.pags-list a:hover {
+.pageswitch-list a:hover {
 	background: #333;
 	color: #fff;
 }
-.pags-list span {
+.pageswitch-list span {
 }
-.pags-list span.active {
+.pageswitch-list span.active {
 	background: #2c94b7;
 	color: #fff;
 }
-.pags-list span.delims {
+.pageswitch-list span.delims {
 	background: #eee;
 }

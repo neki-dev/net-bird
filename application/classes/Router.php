@@ -12,6 +12,22 @@ namespace App;
  * @copyright Copyright (c) 2013 netBird, Inc
  */
 class Router {
+	
+	/**
+	 * Массив описания http ошибок
+	 *
+	 * @var array
+	 */
+	private const HTTP_ERRORS = [
+		'400' => 'Bad Request',
+		'401' => 'Unauthorized',
+		'403' => 'Forbidden',
+		'404' => 'Not Found',
+		'500' => 'Internal Server Error',
+		'502' => 'Bad Gateway',
+		'503' => 'Service Unavailable',
+		'504' => 'Gateway Timeout'
+	];
 
 	/**
 	 * Cписок страниц сайта
@@ -32,7 +48,7 @@ class Router {
 
 		$params = array_keys($_GET);
 		if(isset($params[0]) && $params[0] != 'route') {
-			return self::free();
+			return self::error(400);
 		}
 
 		$_GET['route'] = '/' . ($_GET['route'] ?? '');
@@ -77,7 +93,7 @@ class Router {
 		}
 
 		if(is_null($controller)) {
-			return self::free();
+			return self::error(404);
 		}
 
 		// Генерация контроллера страницы
@@ -136,19 +152,29 @@ class Router {
 	}
 
 	/**
-	 * Вывод ошибки 404
+	 * Вывод http ошибки
 	 * 
+	 * @param int $code - код ошибки
+	 * @param bool $render - флаг отображения страницы с ошибкой
 	 * @return bool
 	 */
-	private static function free() : bool {
+	public static function error(int $code, bool $render = true) : bool {
 
-		header($header = ($_SERVER['SERVER_PROTOCOL'] . ' 404 Not Found'));
+		$errorName = self::HTTP_ERRORS[(string)$code] ?? 'Undefined Error';
+
+		header($header = ($_SERVER['SERVER_PROTOCOL'] . ' ' . $code . ' ' . $errorName));
 
 		if($_SERVER['REQUEST_METHOD'] === 'POST') {
-			die($header);
+			exit($header);
+		} else if($render) {
+			Assets::set('css', [ 'normalize', 'error' ], 'system/');
+			Assets::set('js', []);
+			Assets::register();
+			exit(App::$template->render('components/error-http.tpl', [
+				'error' => $errorName
+			]));
 		} else {
-			App::$template->addGlobal('_settings', App::$settings);
-			die(App::$template->render('components/http-errors/404.tpl'));
+			exit;
 		}
 
 		return false;

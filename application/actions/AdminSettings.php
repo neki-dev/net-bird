@@ -2,6 +2,8 @@
 
 namespace Action;
 
+use App\Action;
+
 class Controller extends \App\BaseController {
 
 	public function edit() : array {

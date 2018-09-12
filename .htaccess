@@ -1,15 +1,19 @@
 AddDefaultCharset UTF-8
 
-Options -Indexes
+Options All -Indexes
 
 RewriteEngine on
 RewriteBase /
-
-RewriteRule ^(.*)(/)$ $1 [L,R=301]
-
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-
 RewriteRule ^(?!template/combine)(.*)$ index.php?route=$1 [QSA,L]
-
 RewriteRule ^template/combine/(.*)\.(css|js)$ /application/combine.php?type=$2&assets=$1
+
+ErrorDocument 400 /application/error.php?code=400
+ErrorDocument 401 /application/error.php?code=401
+ErrorDocument 403 /application/error.php?code=403
+ErrorDocument 404 /application/error.php?code=404
+ErrorDocument 500 /application/error.php?code=500
+ErrorDocument 502 /application/error.php?code=502
+ErrorDocument 503 /application/error.php?code=503
+ErrorDocument 504 /application/error.php?code=504

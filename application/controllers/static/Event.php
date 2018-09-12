@@ -10,9 +10,6 @@ class Event {
 		App::$template->addGlobal('_method', $method);
 		App::$template->addGlobal('_url', $url);
 
-		App::$template->addGlobal('_settings', App::$settings);
-		App::$template->addGlobal('_config', App::$config);
-
 		App::$template->addGlobal('_session', $_SESSION);
 
 	}

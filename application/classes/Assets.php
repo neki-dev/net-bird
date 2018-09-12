@@ -62,6 +62,20 @@ class Assets {
 	}
 
 	/**
+	 * Установка файлов в общий список
+	 * 
+	 * @param string $type - тип файлов
+	 * @param array $list - список названий файлов
+	 * @param string $env - приставка к названиям файлов
+	 * @return void
+	 */
+	public static function set(string $type, array $list, string $env = '') : void {
+
+		self::$items[$type] = preg_filter('/^/', $env, $list);
+
+	}
+
+	/**
 	 * Добавление общего списка в шаблонизатор
 	 * 
 	 * @return void

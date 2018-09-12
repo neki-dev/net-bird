@@ -115,6 +115,20 @@ abstract class Thing {
 	}
 	
 	/**
+	 * Выборка одной записи из таблицы
+	 * 
+	 * @param string $fields - перечень полей
+	 * @param string $sql - sql-постфикс
+	 * @param array $values - массив встраиваемых значений
+	 * @return array
+	 */
+	public function selectOnce(string $fields = '*', string $sql = '', array $values = []) : ?array {
+
+		return App::$DB->selectOnce($this->table, $fields, $sql, $values);
+
+	}
+	
+	/**
 	 * Выборка записей из таблицы в экранированом json формате
 	 * 
 	 * @param string $fields - перечень полей

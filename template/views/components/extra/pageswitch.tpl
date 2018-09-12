@@ -1,5 +1,5 @@
-<div class='pags-list'>
-{% for page in pags %}
+<div class='pageswitch-list'>
+{% for page in pages %}
 	{% if(page.type == 'link') %}
 		<a href='{{ page.link }}'>{{ page.name }}</a>
 	{% elseif(page.type == 'span') %}

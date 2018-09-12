@@ -3,7 +3,7 @@
 /**
  * NetBird Framework
  *
- * @version 1.0.0 release
+ * @version 1.0.1 release
  * @author Essle Jaxcate <me@essle.ru>
  * @copyright Copyright (c) 2013 netBird, Inc
  */

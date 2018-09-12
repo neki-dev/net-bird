@@ -269,6 +269,21 @@ class DB {
 	}
 
 	/**
+	 * Выборка одной записи из таблицы
+	 * 
+	 * @param string $table - название таблицы
+	 * @param string $fields - перечень полей
+	 * @param string $sql - sql-постфикс
+	 * @param array $values - массив встраиваемых значений
+	 * @return array
+	 */
+	public function selectOnce(string $table, string $fields = '*', string $sql = '', array $values = []) : ?array {
+
+		return $this->select($table, $fields, $sql . ' LIMIT 1', $values)[0] ?? null;
+
+	}
+
+	/**
 	 * Удаление записей из таблицы
 	 * 
 	 * @param string $table - название таблицы

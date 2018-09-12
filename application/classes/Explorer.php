@@ -19,13 +19,11 @@ class Explorer {
 	 * @var array
 	 */
 	private const PUBLIC_PATH = [
-
 		'application/actions',
 		'application/classes/Extra',
 		'application/things',
 		'application/controllers',
 		'template'
-
 	];
 	
 	/**
@@ -34,7 +32,6 @@ class Explorer {
 	 * @var array
 	 */
 	private const PATH = [
-
 		'conf' 				=> '.conf',
 		'application' 		=> 'application',
 		'assets' 			=> 'application/cache/assets/?',
@@ -51,7 +48,6 @@ class Explorer {
 		'uploads' 			=> 'application/cache/uploads/?',
 		'js' 				=> 'template/js/?.js',
 		'css' 				=> 'template/css/?.css',
-
 	];
 
 	/**

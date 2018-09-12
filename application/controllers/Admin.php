@@ -62,7 +62,7 @@ class Controller extends \App\BaseController {
 	public function contentEdit($id) {
 
 		return [
-			'defaultContent' => (new \Things\Content)->select('*', 'WHERE id = ?', [ $id ])[0]
+			'defaultContent' => (new \Things\Content)->selectOnce('*', 'WHERE id = ?', [ $id ])
 		];
 
 	}

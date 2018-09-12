@@ -1,22 +1,21 @@
 <?php
 
-use App\App;
-use App\Explorer;
-use App\Assets;
-
-//
-require($_SERVER['DOCUMENT_ROOT'] . '/application/vendor/autoload.php');
-
-// Загрузка конфигурации приложения
-Explorer::configure();
-
 /**
  * Запуск приложения в режиме сборщика
  * Приложение открыто через ./application/combine.php
  */
 
+use App\App;
+use App\Explorer;
+use App\Assets;
+
+require($_SERVER['DOCUMENT_ROOT'] . '/application/vendor/autoload.php');
+
+// Загрузка конфигурации приложения
+Explorer::configure();
+
 if(empty($_GET['type']) || empty($_GET['assets']) || !App::$config['combine']['enabled']) {
-	return header($_SERVER['SERVER_PROTOCOL'] . ' 404 Not Found');
+	\App\Router::error(404, false);
 }
 
 if($_GET['type'] != 'css' && $_GET['type'] != 'js') {

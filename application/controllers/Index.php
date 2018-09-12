@@ -1,8 +1,10 @@
 <?php
 
+namespace Page;
+
 use App\Assets;
 
-class Controller extends Application\BaseController {
+class Controller extends \App\BaseController {
 
 	public function __onControllerLoad() : void {
 

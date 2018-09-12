@@ -1,25 +1,20 @@
 <?php
 
-use App\Action;
-use App\App;
-use App\Explorer;
-use App\CSRF;
-use App\DB;
-
-//
-require($_SERVER['DOCUMENT_ROOT'] . '/application/vendor/autoload.php');
-
-// Загрузка конфигурации приложения
-Explorer::configure();
-
 /**
  * Запуск приложения в режиме POST запроса
  * Приложение открыто через ./application/app-post.php
  */
 
-if($_SERVER['REQUEST_METHOD'] !== 'POST') {
-	return header($_SERVER['SERVER_PROTOCOL'] . ' 404 Not Found');
+if($_SERVER['REQUEST_METHOD'] !== 'POST') {	
+	exit;
 }
+
+use App\App;
+
+require($_SERVER['DOCUMENT_ROOT'] . '/application/vendor/autoload.php');
+
+// Загрузка конфигурации приложения
+\App\Explorer::configure();
 
 // Указание временной зоны
 date_default_timezone_set(App::$config['timezone']);
@@ -29,7 +24,7 @@ session_set_cookie_params(App::$config['session_time']);
 session_start();
 
 // Загрузка модуля для работы с базой данных
-App::$DB = new DB;
+App::$DB = new \App\DB;
 App::$DB->connect(App::$config['database']);
 
 // Добавление в локальное хранилище пользовательских настроек
@@ -40,15 +35,15 @@ if(isset($_POST['_action'])) {
 	$_SERVER['REQUEST_AJAX'] = isset($_POST['_ajax']);
 	
 	// Обработка html-формы
-	Action::do($_POST['_action'], $_POST);
+	\App\Action::do($_POST['_action'], $_POST);
 
 } else {
 
 	$_SERVER['REQUEST_AJAX'] = true;
 
 	// Защита от межсайтовой подделки запросов
-	if(!CSRF::safely()) {
-		Action::result(false, 'Недопустимый токен CSRF');
+	if(!\App\CSRF::safely()) {
+		\App\Action::result(false, 'Недопустимый токен CSRF');
 	}
 
 }
