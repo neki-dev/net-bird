@@ -6,5 +6,7 @@
 /app/classes/*.locked
 /vendor/*
 /.conf
+/phpunit.phar
+/composer.phar
 /composer.lock
 /debug.php

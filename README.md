@@ -4,6 +4,8 @@
 >### Легкий PHP7 фреймворк
 
 [![Build Status](https://travis-ci.org/Essle/netBird.svg?branch=master)](https://travis-ci.org/Essle/netBird)
+[![Latest Stable Version](https://poser.pugx.org/essle/netbird/v/stable)](https://packagist.org/packages/essle/netbird)
+[![License](https://poser.pugx.org/essle/netbird/license)](https://packagist.org/packages/essle/netbird)
 
 ## Преимущества
 
@@ -16,9 +18,8 @@
 
 ## Установка
 
-* Переместить файлы проекта в нужную директорию
-* Установить все зависимости через [Composer](https://getcomposer.org/)
-  * `php composer.phar install` или `install.bat` в корне проекта
+* Выполнить команду `php composer create-project essle/netbird`
+  * Или вручную скачать репозиаторий и запустить `./install.bat`
 * [Настроить](https://github.com/Essle/netBird/wiki/Настройка) конфигурацию
 
 ## Документация
