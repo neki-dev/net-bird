@@ -1,4 +1,4 @@
-<img src="http://essle.ru/_projects/netbird/logotype.png">
+<img src="http://essle.ru/_projects/netbird/logotype.png?2">
 <hr/>
 
 >### Легкий PHP7 фреймворк
@@ -25,6 +25,6 @@
 ## Документация
 
 * [Настройка](https://github.com/Essle/netBird/wiki/Настройка)
-* [Вещи и база данных](https://github.com/Essle/netBird/wiki/Вещи-и-база-данных)
-* [Маршрутизатор](https://github.com/Essle/netBird/wiki/Маршрутизатор)
-* [Формы действий](https://github.com/Essle/netBird/wiki/Формы-действий)
+* **[Вещи и база данных](https://github.com/Essle/netBird/wiki/Вещи-и-база-данных)**
+* **[Маршрутизатор](https://github.com/Essle/netBird/wiki/Маршрутизатор)**
+* **[Формы действий](https://github.com/Essle/netBird/wiki/Формы-действий)**
