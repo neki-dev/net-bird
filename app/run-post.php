@@ -2,7 +2,7 @@
 
 /**
  * Запуск приложения в режиме POST запроса
- * Приложение открыто через ./application/app-post.php
+ * Приложение открыто через ./app/app-post.php
  */
 
 if($_SERVER['REQUEST_METHOD'] !== 'POST') {	
@@ -11,7 +11,7 @@ if($_SERVER['REQUEST_METHOD'] !== 'POST') {
 
 use App\App;
 
-require($_SERVER['DOCUMENT_ROOT'] . '/application/vendor/autoload.php');
+require($_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php');
 
 // Загрузка конфигурации приложения
 \App\Explorer::configure();

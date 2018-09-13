@@ -19,10 +19,10 @@ class Explorer {
 	 * @var array
 	 */
 	private const PUBLIC_PATH = [
-		'application/actions',
-		'application/classes/Extra',
-		'application/things',
-		'application/controllers',
+		'app/actions',
+		'app/classes/extra',
+		'app/things',
+		'app/controllers',
 		'template'
 	];
 	
@@ -33,19 +33,19 @@ class Explorer {
 	 */
 	private const PATH = [
 		'conf' 				=> '.conf',
-		'application' 		=> 'application',
-		'assets' 			=> 'application/cache/assets/?',
-		'conf_default' 		=> 'application/cache/.conf-default',
-		'class' 			=> 'application/classes/?.php',
+		'application' 		=> 'app',
+		'assets' 			=> 'app/cache/assets/?',
+		'conf_default' 		=> 'app/cache/.conf-default',
+		'class' 			=> 'app/classes/?.php',
 		'views' 			=> 'template/views',
-		'views_cache' 		=> 'application/cache/template',
-		'controller' 		=> 'application/controllers/?.php',
-		'controller_static' => 'application/controllers/static/?.php',
-		'action' 			=> 'application/actions/?.php',
-		'action_custom' 	=> 'application/actions/cutsom/__?.php',
-		'debug' 			=> 'application/cache/debug/?.log',
-		'generic' 			=> 'application/cache/generic/?.tmp',
-		'uploads' 			=> 'application/cache/uploads/?',
+		'views_cache' 		=> 'app/cache/template',
+		'controller' 		=> 'app/controllers/?.php',
+		'controller_static' => 'app/controllers/static/?.php',
+		'action' 			=> 'app/actions/?.php',
+		'action_custom' 	=> 'app/actions/cutsom/__?.php',
+		'debug' 			=> 'app/cache/debug/?.log',
+		'generic' 			=> 'app/cache/generic/?.tmp',
+		'uploads' 			=> 'app/cache/uploads/?',
 		'js' 				=> 'template/js/?.js',
 		'css' 				=> 'template/css/?.css',
 	];

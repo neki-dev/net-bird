@@ -2,7 +2,8 @@ form {
 	display: block;
 }
 form * {
-	font: 12px 'Lucida Grande', 'Arial', 'Tahoma', 'Verdana', 'Sans-serif';
+	font-size: 12px;
+	font-family: inherit;
 	outline: none;
 }
 
@@ -146,10 +147,11 @@ form button.outline:hover {
 }
 
 form .input-title {
-	font-weight: bold;
+	font-weight: normal;
 	margin: 15px 0 5px 7px;
 	color: #888;
 	font-size: 11px;
+	font-style: italic;
 }
 
 form .checkbox {

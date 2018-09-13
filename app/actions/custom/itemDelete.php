@@ -3,7 +3,7 @@
 use App\Action;
 use App\App;
 
-require($_SERVER['DOCUMENT_ROOT'] . '/application/app-post.php');
+require($_SERVER['DOCUMENT_ROOT'] . '/app/run-post.php');
 
 Action::exists([ 'type', 'id' ]);
 

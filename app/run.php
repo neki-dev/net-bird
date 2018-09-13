@@ -11,7 +11,7 @@ if($_SERVER['REQUEST_METHOD'] !== 'GET' || !defined('__MODE_MAIN__')) {
 
 use App\App;
 
-require($_SERVER['DOCUMENT_ROOT'] . '/application/vendor/autoload.php');
+require($_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php');
 
 // Загрузка конфигурации приложения
 \App\Explorer::configure();

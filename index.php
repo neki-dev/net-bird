@@ -10,7 +10,7 @@
 
 define('__MODE_MAIN__', true);
 
-require($_SERVER['DOCUMENT_ROOT'] . '/application/app.php');
+require($_SERVER['DOCUMENT_ROOT'] . '/app/run.php');
 
 App\Router::run([
 

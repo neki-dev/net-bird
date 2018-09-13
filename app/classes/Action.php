@@ -76,7 +76,7 @@ class Action {
 
 		// Отображение html-формы
 		return "
-		<form method='post' action='/application/app-post.php' " . (isset($action['params']['ajax']) && $action['params']['ajax'] ? 'data-ajax' : '') . ">
+		<form method='post' action='/app/run-post.php' " . (isset($action['params']['ajax']) && $action['params']['ajax'] ? 'data-ajax' : '') . ">
 			<input type='hidden' name='_action' value='" . $actionController . "' />
 			<input type='hidden' name='_csrf_token' value='" . CSRF::get() . "' />
 			" . $parser . "

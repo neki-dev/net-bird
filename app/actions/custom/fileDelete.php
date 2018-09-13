@@ -3,7 +3,7 @@
 use App\Action;
 use App\Explorer;
 
-require($_SERVER['DOCUMENT_ROOT'] . '/application/app-post.php');
+require($_SERVER['DOCUMENT_ROOT'] . '/app/run-post.php');
 
 Action::exists([ 'file' ]);
 

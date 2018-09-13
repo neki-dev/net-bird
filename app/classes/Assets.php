@@ -19,7 +19,7 @@ class Assets {
 	 * @var array
 	 */
 	private static $items = [
-		'css' => [ 'system/normalize', 'system/interface' ],
+		'css' => [ 'system/fontface', 'system/normalize', 'system/interface' ],
 		'js' => [ 'system/jquery.min', 'system/interface' ]
 	];
 
@@ -39,8 +39,10 @@ class Assets {
 		$compress = '';
 		foreach ($list as $file) {
 			$path = Explorer::path($type, $file);
-			$method = 'minify' . $type;
-			$compress .= PHP_EOL . '/* ' . Explorer::info($path, 'filename') . ' */' . PHP_EOL . PHP_EOL . self::$method(file_get_contents($path)) . PHP_EOL;
+			if(file_exists($path)) {
+				$method = 'minify' . $type;
+				$compress .= PHP_EOL . '/* ' . Explorer::info($path, 'filename') . ' */' . PHP_EOL . PHP_EOL . self::$method(file_get_contents($path)) . PHP_EOL;
+			}
 		}
 
 		return $compress;

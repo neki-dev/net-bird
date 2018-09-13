@@ -13,16 +13,17 @@
     },
     "require-dev": {
     	"twig/twig": ">=2.5.0",
-        "tedivm/jshrink": "~1.0"
+        "tedivm/jshrink": "~1.0",
+        "phpunit/phpunit": "^7"
+    },
+    "scripts": {
+        "test": "phpunit"
     },
     "autoload": {
         "psr-4": {
-            "Things\\": "application/things",
-            "App\\": "application/classes",
-            "Extra\\": "application/classes/extra"
+            "Things\\": "app/things",
+            "App\\": "app/classes",
+            "Extra\\": "app/classes/extra"
         }
-    },
-    "config": {
-        "vendor-dir": "application/vendor"
     }
 }

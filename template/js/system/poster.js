@@ -17,7 +17,7 @@ $(document).ready(function() {
 
 		$.ajax({
 			type: 'POST',
-			url: '/application/app-post.php',
+			url: '/app/run-post.php',
 			data: data,
 			dataType: 'json',
 			cache: false,
@@ -87,7 +87,7 @@ var poster = function(key, data, callback, params) {
 
 	var post = {
 		type: 'POST',
-		url: '/application/actions/custom/' + key + '.php',
+		url: '/app/actions/custom/' + key + '.php',
 		data: data,
 		dataType: 'json',
 		cache: false,

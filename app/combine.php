@@ -2,14 +2,14 @@
 
 /**
  * Запуск приложения в режиме сборщика
- * Приложение открыто через ./application/combine.php
+ * Приложение открыто через ./app/combine.php
  */
 
 use App\App;
 use App\Explorer;
 use App\Assets;
 
-require($_SERVER['DOCUMENT_ROOT'] . '/application/vendor/autoload.php');
+require($_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php');
 
 // Загрузка конфигурации приложения
 Explorer::configure();

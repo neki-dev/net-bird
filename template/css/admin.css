@@ -5,7 +5,7 @@ body {
 }
 
 body {
-	font: 12px 'Lucida Grande', 'Arial', 'Tahoma', 'Verdana', 'Sans-serif';
+	font: 12px 'Proxima Nova', 'Lucida Grande', 'Arial', 'Tahoma', 'Verdana', 'Sans-serif';
 	color: #555;
 	background: #fff;
 }
@@ -74,7 +74,7 @@ hr.big {
 }
 .tool .title a {
 	font-size: 12px;
-	font-weight: 100;
+	font-weight: normal;
 	color: #aaa;
 	display: inline-block;
 	text-decoration: none;
@@ -138,7 +138,7 @@ hr.big {
 	background: #f4f4f4;
 	color: #aaa;
 	border-left: 3px solid #aaa;
-	font-weight: 100;
+	font-weight: normal;
 }
 table#fond {
 	border-spacing: 0 5px;

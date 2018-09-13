@@ -2,12 +2,12 @@
 
 /**
  * Запуск приложения в режиме отображения ошибки
- * Приложение открыто через ./application/error.php
+ * Приложение открыто через ./app/error.php
  */
 
 use App\App;
 
-require($_SERVER['DOCUMENT_ROOT'] . '/application/vendor/autoload.php');
+require($_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php');
 
 // Загрузка конфигурации приложения
 \App\Explorer::configure();

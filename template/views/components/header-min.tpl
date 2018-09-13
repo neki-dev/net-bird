@@ -6,7 +6,7 @@
 {% endfor %}
 {% set css = _assets.css|merge((css ?: [])) %}
 {% if _config.combine.enabled and css|length > 0 %}
-	<link rel='stylesheet' href='/template/combine/{{ css|join(",") }}.css?{{ _config.developed ? random() : "" }}' type='text/css' />
+	<link rel='stylesheet' href='/template/combine.css={{ css|join(",") }}?{{ _config.developed ? random() : "" }}' type='text/css' />
 {% else %}
 	{% for link in css %}
 		<link rel='stylesheet' href='/template/css/{{ link }}.css?{{ _config.developed ? random() : "" }}' type='text/css' />
@@ -17,7 +17,7 @@
 {% endfor %}
 {% set js = _assets.js|merge((js ?: [])) %}
 {% if _config.combine.enabled and js|length > 0 %}
-	<script type='text/javascript' src='/template/combine/{{ js|join(",") }}.js?{{ _config.developed ? random() : "" }}'></script>
+	<script type='text/javascript' src='/template/combine.js={{ js|join(",") }}?{{ _config.developed ? random() : "" }}'></script>
 {% else %}
 	{% for link in js %}
 		<script type='text/javascript' src='/template/js/{{ link }}.js?{{ _config.developed ? random() : "" }}'></script>
