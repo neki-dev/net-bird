@@ -1,5 +1,5 @@
 {
-    "name": "netBird",
+    "name": "essle/netbird",
     "description": "Легкий PHP7 фреймворк",
     "keywords": ["framework", "netbird"],
     "license": "MIT",

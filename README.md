@@ -3,6 +3,8 @@
 
 >### Легкий PHP7 фреймворк
 
+[![Build Status](https://travis-ci.org/Essle/netBird.svg?branch=master)](https://travis-ci.org/Essle/netBird)
+
 ## Преимущества
 
 * Автоматическое генерирование участков приложения
