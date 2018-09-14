@@ -1,4 +1,4 @@
-<img src="http://essle.ru/_projects/netbird/logotype.png?2">
+<img src="http://essle.ru/_projects/netbird/logotype.png?3">
 <hr/>
 
 >### Легкий PHP7 фреймворк
