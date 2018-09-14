@@ -47,7 +47,7 @@ class Explorer {
 		'generic' 			=> 'app/cache/generic/?.tmp',
 		'uploads' 			=> 'app/cache/uploads/?',
 		'js' 				=> 'template/js/?.js',
-		'css' 				=> 'template/css/?.css',
+		'css' 				=> 'template/css/?.css'
 	];
 
 	/**
@@ -63,7 +63,11 @@ class Explorer {
 			throw new EngineException('Неизвестный путь проводника (' . $pathKey . ')');
 		}
 
-		return str_replace('/', DIRECTORY_SEPARATOR, $_SERVER['DOCUMENT_ROOT']) . DIRECTORY_SEPARATOR . str_replace('?', $item, self::PATH[$pathKey]);
+		return str_replace(
+			'/', 
+			DIRECTORY_SEPARATOR, 
+			($_SERVER['DOCUMENT_ROOT'] ? $_SERVER['DOCUMENT_ROOT'] . '/' : '') . str_replace('?', $item, self::PATH[$pathKey])
+		);
 
 	}
 
@@ -74,6 +78,10 @@ class Explorer {
 	 * @return bool
 	 */
 	public static function isPublicPath(string $path) : bool {
+
+		if(stripos($path, $_SERVER['DOCUMENT_ROOT']) === false) {
+			$path = $_SERVER['DOCUMENT_ROOT'] . '/' . $path;
+		}
 
 		foreach (self::PUBLIC_PATH as $value) {
 			$publicPath = str_replace('/', DIRECTORY_SEPARATOR, $_SERVER['DOCUMENT_ROOT'] . '/' . $value);
@@ -191,9 +199,9 @@ class Explorer {
 	/**
 	 * Загрузка конфигурации приложения
 	 * 
-	 * @return void
+	 * @return array
 	 */
-	public static function configure() : void {
+	public static function configure() : array {
 
 		// Проверка на наличие конфигурационного файла
 		if(!file_exists(Explorer::path('conf'))) {
@@ -210,8 +218,8 @@ class Explorer {
 
 		// Загрузка конфигурации приложения
 		require(Explorer::path('conf'));
-		// Добавление в локальное хранилище конфигурации приложения
-		App::$config = $_CONF;
+
+		return $_CONF;
 
 	}
 

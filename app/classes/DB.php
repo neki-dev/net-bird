@@ -349,7 +349,7 @@ class DB {
 
 		$type = ($asc ? 'ASC' : 'DESC');
 
-		return ' ORDER BY `' . str_replace(',', '` ' . $type . ', `', $field) . '` ' . $type;
+		return ' ORDER BY `' . str_replace([ ' ', ',' ], [ '', '` ' . $type . ', `' ], $field) . '` ' . $type;
 
 	}
 

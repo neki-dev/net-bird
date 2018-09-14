@@ -14,7 +14,7 @@ use App\App;
 require($_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php');
 
 // Загрузка конфигурации приложения
-\App\Explorer::configure();
+App::$config = \App\Explorer::configure();
 
 // Указание временной зоны
 date_default_timezone_set(App::$config['timezone']);

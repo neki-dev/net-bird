@@ -5,7 +5,7 @@ html {
 }
 
 body {
-	font: 12px 'Proxima Nova', 'Lucida Grande', 'Arial', 'Tahoma', 'Verdana', 'Sans-serif';
+	font: 12px [[Source Sans Pro]], 'Lucida Grande', 'Arial', 'Tahoma';
 	color: #444;
 	background: #fff url('/template/images/logotype.png') center center no-repeat;
 }

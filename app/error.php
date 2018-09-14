@@ -10,7 +10,7 @@ use App\App;
 require($_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php');
 
 // Загрузка конфигурации приложения
-\App\Explorer::configure();
+App::$config = \App\Explorer::configure();
 
 // Загрузка шаблонизатора
 App::$template = new \Twig_Environment(

@@ -149,6 +149,21 @@ class Debug {
 	}
 
 	/**
+	 * Интеграция модуля в шаблонизатор
+	 * 
+	 * @return void
+	 */
+	public static function integrateToTemplate() : void {
+
+		App::$template->addFunction(
+			new \Twig_SimpleFunction('udev', function() : string {
+				return (App::$config['developed'] ? '?u=' . rand(1000, 9999) : '');
+			})
+		);
+
+	}
+
+	/**
 	 * Запись информации в логи
 	 * 
 	 * @param string $type - тип лога

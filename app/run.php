@@ -10,11 +10,12 @@ if($_SERVER['REQUEST_METHOD'] !== 'GET' || !defined('__MODE_MAIN__')) {
 }
 
 use App\App;
+use App\Debug;
 
 require($_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php');
 
 // Загрузка конфигурации приложения
-\App\Explorer::configure();
+App::$config = \App\Explorer::configure();
 
 // Указание временной зоны
 date_default_timezone_set(App::$config['timezone']);
@@ -36,7 +37,8 @@ App::$template = new \Twig_Environment(
 );
 
 // Регистрация отладчика
-\App\Debug::handle();
+Debug::handle();
+Debug::integrateToTemplate();
 
 // Загрузка модуля для работы с базой данных
 App::$DB = new \App\DB;

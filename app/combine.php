@@ -12,9 +12,9 @@ use App\Assets;
 require($_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php');
 
 // Загрузка конфигурации приложения
-Explorer::configure();
+App::$config = Explorer::configure();
 
-if(empty($_GET['type']) || empty($_GET['assets']) || !App::$config['combine']['enabled']) {
+if(empty($_GET['type']) || empty($_GET['assets'])) {
 	\App\Router::error(404, false);
 }
 

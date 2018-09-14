@@ -8,27 +8,22 @@
 <meta property='og:type' content='website' />
 <meta property='og:image' content='/template/favicon/mstile.png' />
 <meta property='og:description' content='{{ description }}' />
+{% for font in _assets.fonts %}
+	<link rel='stylesheet' href='https://fonts.googleapis.com/css?family={{ font }}:300,300i,400,400i,700,700i&amp;subset=cyrillic' type='text/css' />
+{% endfor %}
 {% for link in css_remote %}
 	<link rel='stylesheet' href='{{ link }}' type='text/css' />
 {% endfor %}
 {% set css = _assets.css|merge((css ?: [])) %}
-{% if _config.combine.enabled and css|length > 0 %}
-	<link rel='stylesheet' href='/template/combine.css={{ css|join(",") }}?{{ _config.developed ? random() : "" }}' type='text/css' />
-{% else %}
-	{% for link in css %}
-		<link rel='stylesheet' href='/template/css/{{ link }}.css?{{ _config.developed ? random() : "" }}' type='text/css' />
-	{% endfor %}
+{% if css|length > 0 %}
+	<link rel='stylesheet' href='/template/combine.css={{ css|join(",") }}{{ udev() }}' type='text/css' />
 {% endif %}
 {% for link in js_remote %}
 	<script type='text/javascript' src='{{ link }}'></script>
 {% endfor %}
 {% set js = _assets.js|merge((js ?: [])) %}
-{% if _config.combine.enabled and js|length > 0 %}
-	<script type='text/javascript' src='/template/combine.js={{ js|join(",") }}?{{ _config.developed ? random() : "" }}'></script>
-{% else %}
-	{% for link in js %}
-		<script type='text/javascript' src='/template/js/{{ link }}.js?{{ _config.developed ? random() : "" }}'></script>
-	{% endfor %}
+{% if js|length > 0 %}
+	<script type='text/javascript' src='/template/combine.js={{ js|join(",") }}{{ udev() }}'></script>
 {% endif %}
 <link rel='shortcut icon' href='/template/favicon/favicon.ico' />
 <meta name='apple-mobile-web-app-title' content='RFG' />

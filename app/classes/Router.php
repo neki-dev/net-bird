@@ -126,9 +126,9 @@ class Router {
 			if(!method_exists($controller, $method)) {
 				throw new EngineException('Неизвестный метод контроллера страницы');
 			}
-			Assets::register();
 			$result = call_user_func_array([ $controller, $method ], $matches['values']);
 			if($result !== false) {
+				Assets::register();
 				echo App::$template->render($class . '-' . $method . '.tpl', (gettype($result) == 'array' ? $result : []));
 			}
 		}

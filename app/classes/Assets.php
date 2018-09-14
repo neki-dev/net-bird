@@ -19,7 +19,7 @@ class Assets {
 	 * @var array
 	 */
 	private static $items = [
-		'css' => [ 'system/fontface', 'system/normalize', 'system/interface' ],
+		'css' => [ 'system/normalize', 'system/interface' ],
 		'js' => [ 'system/jquery.min', 'system/interface' ]
 	];
 
@@ -78,11 +78,25 @@ class Assets {
 	}
 
 	/**
+	 * Получение файлов из общего списка
+	 * 
+	 * @param string $type - тип файлов
+	 * @return void
+	 */
+	public static function get(string $type) : array {
+
+		return self::$items[$type];
+
+	}
+
+	/**
 	 * Добавление общего списка в шаблонизатор
 	 * 
 	 * @return void
 	 */
 	public static function register() : void {
+
+		self::parseFonts();
 
 		if(method_exists(App::$template, 'addGlobal')) {
 			App::$template->addGlobal('_assets', self::$items);
@@ -106,6 +120,7 @@ class Assets {
 			'/}/',
 			'/;}/',
 			'/\s+$/',
+			'/\[\[([a-zA-Z\s-0-9-_]+)\]\]/'
 		], [
 			'',
 			' ',
@@ -114,6 +129,7 @@ class Assets {
 			'}' . PHP_EOL,
 			'}',
 			'',
+			'"$1"',
 		], $css);
 
 	}
@@ -129,6 +145,38 @@ class Assets {
 		return \JShrink\Minifier::minify($js, [ 
 			'flaggedComments' => false 
 		]);
+
+	}
+
+	/**
+	 * Автоматические подключение шрифтов
+	 * 
+	 * @return void
+	 */
+	private static function parseFonts() : void {
+
+		$fonts = [];
+
+		foreach(self::$items['css'] as $file) {
+			$matches = [];
+			preg_match_all(
+				'/\[\[([a-zA-Z\s-0-9-_]+)\]\]/', 
+				file_get_contents(Explorer::path('css', $file)), 
+				$matches
+			);
+			unset($matches[0]);
+			foreach($matches as $match) {
+				if(isset($match[0])) {
+					$fonts = array_merge($fonts, $match);
+				}
+			}
+		}
+
+		self::$items['fonts'] = array_unique($fonts);
+
+		foreach(self::$items['fonts'] as $key => $value) {
+			self::$items['fonts'][$key] = str_replace(' ', '+', $value);
+		}
 
 	}
 
