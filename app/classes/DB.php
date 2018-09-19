@@ -111,20 +111,20 @@ class DB {
 	public function createTable(string $name, array $items) : void {
 
 		$uniq = false;
-		$sql = "CREATE TABLE `" . $name . "` (";
+		$sql = 'CREATE TABLE `' . $name . '` (';
 
 		foreach ($items as $key => $data) {
 			if(isset($data['uniq']) && $data['uniq']) {
 				$uniq = $key;
 			}
-			$sql .= "`" . $key . "` " . self::getFieldType($data) . ",";
+			$sql .= '`' . $key . '` ' . self::getFieldType($data) . ',';
 		}
 
 		if($uniq) {
-			$sql .= "PRIMARY KEY (`" . $uniq . "`)";
+			$sql .= 'PRIMARY KEY (`' . $uniq . '`)';
 		}
 
-		$sql .= ") ENGINE=MyISAM DEFAULT CHARSET=utf8;";
+		$sql .= ') ENGINE=MyISAM DEFAULT CHARSET=utf8;';
 
 		$this->model->exec($sql);
 
@@ -167,15 +167,13 @@ class DB {
 	 */
 	public function getTableFields(string $table) : array {
 
-		$sql = $this->model->prepare('SELECT DISTINCT column_name FROM INFORMATION_SCHEMA.COLUMNS WHERE table_name = ?');
-		$sql->execute([ 
-			$this->prefix . $table
-		]);
+		$sql = $this->model->prepare('SHOW COLUMNS FROM ' . $this->prefix . $table);
+		$sql->execute();
 
 		$data = $sql->fetchAll();
 		$list = [];
 		foreach($data as $value) {
-			$list[] = $value['column_name'];
+			$list[] = $value['Field'];
 		}
 
 		return $list;

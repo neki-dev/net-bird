@@ -212,7 +212,7 @@ class Explorer {
 			);
 			file_put_contents(
 				Explorer::path('conf'), 
-				preg_replace("/'application_key'\s*=>\s*''/", "'application_key'	=> '" . md5(uniqid()) . "'", $default)
+				preg_replace('/\'application_key\'\s*=>\s*\'\'/', '\'application_key\'	=> \'' . md5(uniqid()) . '\'', $default)
 			);
 		}
 

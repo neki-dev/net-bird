@@ -9,27 +9,23 @@ class Controller extends \App\BaseController {
 	public function edit() : array {
 		return [
 			'scheme' => [
-
 				'sitename' => [ 
 					'type' => 'input',
-					'comment' => 'Название сайта',
-					'saved' => true,
+					'title' => 'Название сайта',
 					'validate' => [
 						[ '^.{3,64}$', 'Длина этого поля должна быть от 3 до 64 символов' ]
 					]
 				],
 				'email' => [ 
 					'type' => 'input',
-					'comment' => 'Электронная почта',
-					'saved' => true,
+					'title' => 'Электронная почта',
 					'validate' => [
 						[ '^.{5,128}$', 'Длина этого поля должна быть от 5 до 128 символов' ]
 					]
 				],
 				'adminkey' => [ 
 					'type' => 'input',
-					'comment' => 'Ключ авторизации панели управления',
-					'saved' => true,
+					'title' => 'Ключ авторизации панели управления',
 					'validate' => [
 						[ '^.{3,16}$', 'Длина этого поля должна быть от 3 до 16 символов' ]
 					]
@@ -37,8 +33,7 @@ class Controller extends \App\BaseController {
 				'_submit' => [ 
 					'type' => 'button',
 					'value' => 'Сохранить'
-				],
-
+				]
 			],
 			'callback' => function(array $data) {
 
@@ -49,7 +44,10 @@ class Controller extends \App\BaseController {
 
 				return Action::result(true, 'Настройки успешно сохранены', 'admin/settings');
 
-			}
+			}, 
+			'params' => [
+				'autocomplete' => false
+			]
 		];
 	}
 

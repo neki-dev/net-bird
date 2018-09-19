@@ -1,6 +1,6 @@
-<select name='{{ name }}'{{ data.class }}{{ data.disabled ? ' disabled' : '' }}>
-	<option selected disabled>{{ data.desc }}</option>
-	{% for option in data.value %}
+<select {{ tags|raw }}>
+	<option selected disabled>{{ data.placeholder }}</option>
+	{% for option in value %}
 		{% if option[2] %}
 			<option value='{{ option[0] }}' selected>{{ option[1] }}</option>
 		{% else %}

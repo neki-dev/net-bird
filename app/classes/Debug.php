@@ -33,6 +33,33 @@ class Debug {
 	}
 
 	/**
+	 * Замер средней длительности выполнения функции
+	 * 
+	 * @param mixed $callback - функция
+	 * @param array $params - параметры функции
+	 * @param int $loop - количество повторений для одного замера
+	 * @param int $avgLoop - количество повторений для среднего значения
+	 * @return float
+	 */
+	public static function measurement($callback, array $params = [], int $loop = 10000, int $avgLoop = 10) : float {
+
+		$total = 0;
+
+		ob_start();
+		for($a = 1; $a <= $avgLoop; ++$a) {
+			$start = microtime(true);
+			for($i = 1; $i <= $loop; ++$i) {
+				call_user_func_array($callback, $params);
+			}
+			$total += microtime(true) - $start;
+		}
+		ob_end_clean();
+
+		return $total / $avgLoop;
+
+	}
+
+	/**
 	 * Регистрация обработчиков ошибок
 	 * 
 	 * @return void
@@ -97,7 +124,7 @@ class Debug {
 			self::log('error', md5($file . '+' . $line . '+' . $errno), $message, $file, $line);
 
 			Assets::add('css', [ 'debug', 'debug.parse', 'highlight' ], 'system/');
-			Assets::add('js', [ 'highlight' ], 'system/');
+			Assets::add('js', [ 'highlight.min' ], 'system/');
 			Assets::register();
 			
 			if(ob_get_length()) {
@@ -110,7 +137,7 @@ class Debug {
 			$codeLinesAll = explode(PHP_EOL, $code);
 			$codeLinesFrm = [];
 			$lineStart = -1;
-			for($i = $line - 11; $i < $line + 10; $i++) {
+			for($i = $line - 11; $i < $line + 10; ++$i) {
 				if(isset($codeLinesAll[$i])) {
 					if($lineStart == -1) {
 						$lineStart = $i + 1;
@@ -207,7 +234,7 @@ class Debug {
 
 			$str = 'NULL';
 
-		} else if($var == "") {
+		} else if($var == '') {
 
 			$str = 'EMPTY';
 

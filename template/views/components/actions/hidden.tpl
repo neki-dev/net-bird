@@ -1,1 +1,1 @@
-<input type='text' value='{{ data.value }}' name='{{ name }}' style='display:none;' />
+<input value="{{ value }}" {{ tags|raw }} style='display:none;' />

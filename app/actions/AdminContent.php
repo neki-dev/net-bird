@@ -9,23 +9,21 @@ class Controller extends \App\BaseController {
 	public function add() : array {
 		return [
 			'scheme' => [
-
 				'title' => [ 
 					'type' => 'input',
-					'desc' => 'Название',
-					'saved' => true,
+					'placeholder' => 'Название',
 					'validate' => [
 						[ '^.{3,128}$', 'Длина этого поля должна быть от 3 до 128 символов' ]
 					]
 				],
 				'photo' => [ 
 					'type' => 'file',
-					'desc' => 'Фотография'
+					'placeholder' => 'Фотография',
+					'accept' => 'image/*'
 				],
 				'content' => [ 
 					'type' => 'textarea',
-					'desc' => 'Содержимое',
-					'saved' => true,
+					'placeholder' => 'Содержимое',
 					'validate' => [
 						[ '^.{3,4096}$', 'Длина этого поля должна быть от 3 до 4096 символов' ]
 					]
@@ -33,8 +31,7 @@ class Controller extends \App\BaseController {
 				'_submit' => [ 
 					'type' => 'button',
 					'value' => 'Добавить'
-				],
-
+				]
 			],
 			'callback' => function(array $data) {
 
@@ -52,19 +49,16 @@ class Controller extends \App\BaseController {
 	public function edit() : array {
 		return [
 			'scheme' => [
-
 				'title' => [ 
 					'type' => 'input',
-					'desc' => 'Название',
-					'saved' => true,
+					'placeholder' => 'Название',
 					'validate' => [
 						[ '^.{3,128}$', 'Длина этого поля должна быть от 3 до 128 символов' ]
 					]
 				],
 				'content' => [ 
 					'type' => 'textarea',
-					'desc' => 'Содержимое',
-					'saved' => true,
+					'placeholder' => 'Содержимое',
 					'validate' => [
 						[ '^.{3,4096}$', 'Длина этого поля должна быть от 3 до 4096 символов' ]
 					]
@@ -81,8 +75,7 @@ class Controller extends \App\BaseController {
 					'value' => 'Назад',
 					'class' => [ 'outline' ],
 					'onclick' => 'window.history.back();return false;'
-				],
-
+				]
 			],
 			'callback' => function(array $data) {
 

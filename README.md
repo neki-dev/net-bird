@@ -1,4 +1,4 @@
-<img src="http://essle.ru/_projects/netbird/logotype.png?3">
+<img src="http://essle.ru/_projects/netbird/logotype.png?4">
 <hr/>
 
 >### Легкий PHP7 фреймворк
@@ -30,3 +30,4 @@
 * **[Маршрутизатор](https://github.com/Essle/netBird/wiki/Маршрутизатор)**
 * **[Формы действий](https://github.com/Essle/netBird/wiki/Формы-действий)**
 * [Стили, скрипты и шрифты](https://github.com/Essle/netBird/wiki/Стили,-скрипты-и-шрифты)
+* [Отладка кода](https://github.com/Essle/netBird/wiki/Отладка-кода)

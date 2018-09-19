@@ -24,10 +24,10 @@ $(document).ready(function() {
 		var form = new FormData();
 
 		form.append('file', $(this).prop('files')[0]);
-		form.append('setsize', fileSubject.attr('data-size'));
+		form.append('maxsize', fileSubject.attr('data-size') || 2);
 		form.append('_csrf_token', CSRF_TOKEN);
 
-		poster('fileUpload', form, function(success, result) {
+		runPost.send('fileUpload', form, function(success, result) {
 			if(success) {
 				fileData.attr('value', result.file);
 				presetFileLoad(result.file, result.name);
@@ -51,7 +51,7 @@ $(document).ready(function() {
 
 	fileDelete.click(function() {
 
-		poster('fileDelete', {
+		runPost.send('fileDelete', {
 			file: activeFile,
 		}, function(success, result) {
 			if(success) {

@@ -39,33 +39,56 @@ class Action {
 				break;
 			}
 		}
-		unset($_SESSION['action']);
 
 		// Обработка схемы html-формы
 		foreach($action['scheme'] as $name => $data) {
 
-			$data['class'] = ($data['class'] ?? []);
-			if(isset($_SESSION['action']['element']) && $_SESSION['action']['element'] == $name) {
-				$data['class'][] = 'error';
+			$data['class'] = $data['class'] ?? '';
+			$data['subtype'] = $data['subtype'] ?? 'text';
+			$data['name'] = $name;
+
+			$tags = ($data['type'] == 'file') ? '' : 'name="' . $name . '"';
+			foreach($data as $key => $value) {
+				switch($key) {
+					case 'type':
+					case 'validate':
+					case 'value':
+					case 'title':
+						continue 2;
+						break;
+					case 'class':
+						if(is_array($value)) {
+							$value = implode(' ', $value);
+						} else {
+							$value = str_replace(',', ' ', $value);
+						}
+						if(isset($_SESSION['action']) && isset($_SESSION['action']['element']) && $_SESSION['action']['element'] == $name) {
+							$value .= 'error';
+						}
+						break;
+					case 'subtype':
+						$key = 'type';
+						break;
+						break;
+				}
+				$value = trim($value);
+				if(strlen($value) > 0) {
+					$tags .= ' ' . $key . '="' . $value .'"';
+				}
 			}
-			$data['class'] = (count($data['class']) > 0 ? ' class=' . implode(' ', $data['class']) : '');
-			$data['class'] .= (isset($data['mask']) ? ' pattern="' . $data['mask'] . '"' : '');
 
-			$data['value'] = ($_SESSION['action']['saved'][$name] ?? ($default[$name] ?? ($data['value'] ?? '')));
-			$data['size'] = ($data['size'] ?? 1);
-			$data['accept'] = ($data['accept'] ?? '*/*');
+			$value = ($_SESSION['action']['saved'][$name] ?? ($default[$name] ?? ($data['value'] ?? '')));
 
-			if(isset($data['range'])) {
-				$data['range'] = ' min="' . $data['range'][0] . '" max="' . $data['range'][1] . '"';
-			}
-
-			if(isset($data['onclick'])) {
-				$data['onclick'] = ' onclick="' . $data['onclick'] . '"';
+			if(isset($data['title'])) {
+				$parser .= App::$template->render('components/actions/title.tpl', [
+					'text' => $data['title']
+				]) . PHP_EOL;
 			}
 
 			$parser .= App::$template->render('components/actions/' . $data['type'] . '.tpl', [
+				'tags' => $tags,
+				'value' => $value,
 				'data' => $data,
-				'name' => $name,
 			]) . PHP_EOL;
 	
 		}
@@ -74,14 +97,18 @@ class Action {
 			$parser = "<input type='hidden' name='_ajax' value='1' />" . $parser;
 		}
 
+		unset($_SESSION['action']);
+
 		// Отображение html-формы
-		return "
-		<form method='post' action='/app/run-post.php' " . (isset($action['params']['ajax']) && $action['params']['ajax'] ? 'data-ajax' : '') . ">
-			<input type='hidden' name='_action' value='" . $actionController . "' />
-			<input type='hidden' name='_csrf_token' value='" . CSRF::get() . "' />
-			" . $parser . "
-		</form>
-		";
+		return '<form ' . 
+			(isset($action['params']['autocomplete']) && !$action['params']['autocomplete'] ? 'autocomplete="off"' : '') . 
+			' method="post" action="/app/run-post.php" ' . 
+			(isset($action['params']['ajax']) && $action['params']['ajax'] ? 'data-ajax' : '') . 
+			'>
+			<input type="hidden" name="_action" value="' . $actionController . '" />
+			<input type="hidden" name="_csrf_token" value="' . CSRF::get() . '" />
+			' . $parser . '
+		</form>';
 
 	}
 
@@ -97,7 +124,6 @@ class Action {
 		// Защита от межсайтовой подделки запросов
 		if(!CSRF::safely($post)) {
 			self::sendResult(false, 'Недопустимый токен CSRF');
-			return;
 		}
 
 		// Загрузка схемы и коллбэка
@@ -115,9 +141,6 @@ class Action {
 		// Сохранение данных для следущего отображения html-формы
 		$_SESSION['action']['saved'] = [];
 		foreach($action['scheme'] as $name => $data) {
-			if(empty($data['saved']) || !$data['saved']) {
-				continue;
-			}
 			$_SESSION['action']['saved'][$name] = $post[$name];
 		}
 
@@ -132,7 +155,6 @@ class Action {
 				}
 				$_SESSION['action']['element'] = $name;
 				self::sendResult(false, $validate[1]);
-				break 2;
 			}
 		}
 
@@ -154,7 +176,7 @@ class Action {
 			})
 		);
 
-		Assets::add('js', [ 'poster' ], 'system/');
+		Assets::add('js', [ 'run-post' ], 'system/');
 
 	}
 
@@ -228,9 +250,13 @@ class Action {
 			if(!is_null($result)) {
 				$_SESSION['action'][$status ? 'success' : 'error'] = $result;
 			}
+			if($status) {
+				$_SESSION['action']['saved'] = [];
+			}
 			if($redirect = $redirect ?? $_SERVER['HTTP_REFERER']) {
 				header('Location: ' . $redirect);
 			}
+			exit;
 		}
 
 	}
@@ -248,11 +274,13 @@ class Action {
 
 		// Загрузка класса контроллера
 		App::getController($actionController, ($class), ($method));
-		$path = Explorer::path('action', $class);
-		if(!file_exists($path)) {
-			throw new EngineException('Неизвестный контроллер формы');
+		if(!class_exists('\Action\Controller', false)) {
+			$path = Explorer::path('action', $class);
+			if(!file_exists($path)) {
+				throw new EngineException('Неизвестный контроллер формы');
+			}
+			require($path);
 		}
-		require($path);
 		$action = new \Action\Controller;
 
 		// Загрузка данных из класса контроллера

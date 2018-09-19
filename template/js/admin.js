@@ -71,7 +71,7 @@ var fondInit = function(table, params) {
 			
 			var value = editActive.children('input').val();
 			
-			poster(params.type + 'Edit', {
+			runPost.send(params.type + 'Edit', {
 				id: editActive.parent().attr('data-id'),
 				field: editActive.attr('data-field'),
 				value: value
@@ -112,7 +112,7 @@ var fondInit = function(table, params) {
 
 			var self = $(this).parent().parent();
 			
-			poster('itemDelete', { 
+			runPost.send('itemDelete', { 
 				type: params.type,
 				id: self.attr('data-id')
 			}, function(success, result) {

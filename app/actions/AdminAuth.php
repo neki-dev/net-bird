@@ -10,10 +10,10 @@ class Controller extends \App\BaseController {
 	public function login() : array {
 		return [
 			'scheme' => [
-
 				'adminkey' => [ 
 					'type' => 'input',
-					'desc' => 'Ключ авторизации',
+					'subtype' => 'password',
+					'placeholder' => 'Ключ авторизации',
 					'class' => [ 'noborder' ],
 					'validate' => [
 						[ '^.{3,16}$', 'Длина этого поля должна быть от 3 до 16 символов' ]
@@ -22,8 +22,7 @@ class Controller extends \App\BaseController {
 				'_submit' => [ 
 					'type' => 'button',
 					'value' => 'Продолжить'
-				],
-
+				]
 			],
 			'callback' => function(array $data) {
 

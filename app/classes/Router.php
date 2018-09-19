@@ -44,14 +44,18 @@ class Router {
 	 */
 	public static function run(array $map) : bool {
 
-		self::$map = array_change_key_case(array_flip($map));
-
 		$params = array_keys($_GET);
 		if(isset($params[0]) && $params[0] != 'route') {
 			return self::error(400);
 		}
 
-		$_GET['route'] = '/' . ($_GET['route'] ?? '');
+		if(isset($_GET['route'])) {
+			if($_GET['route'][0] != '/') {
+				$_GET['route'] = '/' . $_GET['route'];
+			}
+		} else {
+			$_GET['route'] = '/';
+		}
 
 		$controller = null;
 		$matches = [
@@ -68,8 +72,7 @@ class Router {
 				$map[$url] = $c;
 			}
 
-			preg_match('/{([a-zA-Z]+)}/', $url, $matches['args']);
-			if(count($matches['args']) == 0) {
+			if(preg_match('/{([a-zA-Z]+)}/', $url, $matches['args']) != 1) {
 				// Статический адрес страницы
 				if($url == $_GET['route']) {
 					$controller = $c;
@@ -78,12 +81,7 @@ class Router {
 			} else {
 				// Адрес страницы содержит параметры
 				unset($matches['args'][0]);
-				preg_match(
-					'/^' . preg_replace('/{[a-zA-Z]+}/', '([^\/]+)', str_replace('/', '\/', $url)) . '$/', 
-					$_GET['route'], 
-					$matches['values']
-				);
-				if(count($matches['values']) > 1) {
+				if(preg_match('/^' . preg_replace('/{[a-zA-Z]+}/', '([^\/]+)', str_replace('/', '\/', $url)) . '$/', $_GET['route'], $matches['values']) == 1) {
 					unset($matches['values'][0]);
 					$controller = $c;
 					break;
@@ -91,6 +89,8 @@ class Router {
 			}
 
 		}
+
+		self::$map = array_change_key_case(array_flip($map));
 
 		if(is_null($controller)) {
 			return self::error(404);
@@ -134,7 +134,7 @@ class Router {
 		}
 		\Event::__onControllerAfterLoad($_GET['route'], $class, $method);
 		
-		return true;
+		exit;
 
 	}
 

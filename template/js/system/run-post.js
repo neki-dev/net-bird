@@ -2,6 +2,7 @@
 
 var CSRF_TOKEN = null;
 var ajaxCallbacks = [];
+var runPost = {};
 
 $(document).ready(function() {
 
@@ -10,7 +11,7 @@ $(document).ready(function() {
 	$(this).on('submit', 'form[data-ajax]', function(e) {
 
 		var self = $(this);
-		var data = serializeForm(self);
+		var data = runPost.__serialize(self);
 		var callback = ajaxCallbacks[data['_action']];
 
 		hideFormMessage(self, true);
@@ -23,7 +24,7 @@ $(document).ready(function() {
 			cache: false,
 			success: function(e) {
 				if(!callback) {
-					console.debug(e['result']);
+					runPost.showResult(self, 'success', e['result']);
 				} else {
 					if(e['status'] === undefined) {
 						callback(false, 'Undefined status', self);
@@ -34,7 +35,7 @@ $(document).ready(function() {
 			},
 			error: function(e) {
 				if(!callback) {
-					console.error(e.responseText);
+					runPost.showResult(self, 'error', e.responseText);
 				} else {
 					callback(false, e.responseText, self);
 				}
@@ -47,13 +48,13 @@ $(document).ready(function() {
 
 });
 
-var addAjaxCallback = function(key, callback) {
+runPost.callback = function(key, callback) {
 
 	ajaxCallbacks[key] = callback;
 
 };
 
-var hideFormMessage = function(form, opacity = false) {
+runPost.hideResult = function(form, opacity = false) {
 
 	var statuses = [ 'success', 'error' ];
 	for(var key in statuses) {
@@ -67,13 +68,13 @@ var hideFormMessage = function(form, opacity = false) {
 
 };
 
-var showFormMessage = function(form, type, message) {
+runPost.showResult = function(form, type, message) {
 
 	form.prepend("<div class='form-" + type + "'>" + message + "</div>");
 
 };
 
-var poster = function(key, data, callback, params) {
+runPost.send = function(key, data, callback, params) {
 
 	data = data || {};
 	params = params || {};
@@ -115,7 +116,7 @@ var poster = function(key, data, callback, params) {
 
 };
 
-var serializeForm = function(form) {
+runPost.__serialize = function(form) {
 
 	form = form.serializeArray();
 
