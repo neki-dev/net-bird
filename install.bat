@@ -1,2 +1,2 @@
-php composer.phar install
+php composer install
 pause
