@@ -9,13 +9,12 @@ if($_SERVER['REQUEST_METHOD'] !== 'GET' || !defined('__MODE_MAIN__')) {
 	exit;
 }
 
-use App\App;
-use App\Debug;
+use App\{App,Debug,DataBase,CSRF,Explorer,Action,Tower};
 
 require($_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php');
 
 // Загрузка конфигурации приложения
-App::$config = \App\Explorer::configure();
+App::$config = Explorer::configure();
 
 // Указание временной зоны
 date_default_timezone_set(App::$config['timezone']);
@@ -28,10 +27,10 @@ session_set_cookie_params(App::$config['session_time']);
 session_start();
 
 // Загрузка шаблонизатора
-App::$template = new \Twig_Environment(
-	new \Twig_Loader_Filesystem(\App\Explorer::path('views')), [
+App::$template = new Twig_Environment(
+	new Twig_Loader_Filesystem(Explorer::path('views')), [
 		'debug'	=> App::$config['developed'],
-		'cache'	=> \App\Explorer::path('views_cache'),
+		'cache'	=> Explorer::path('views_cache'),
 		'auto_reload' => true
 	]
 );
@@ -41,18 +40,15 @@ Debug::handle();
 Debug::integrateToTemplate();
 
 // Загрузка модуля для работы с базой данных
-App::$DB = new \App\DB;
+App::$DB = new DataBase;
 App::$DB->connect(App::$config['database']);
 
-// Добавление в локальное хранилище пользовательских настроек
-App::$settings = (new Things\Settings)->parse();
-
-App::$template->addGlobal('_settings', App::$settings);
-App::$template->addGlobal('_config', App::$config);
-
 // Загрузка модуля защиты от межсайтовой подделки запросов
-\App\CSRF::start();
-\App\CSRF::integrateToTemplate();
+CSRF::start();
+CSRF::integrateToTemplate();
 
 // Загрузка модуля для работы с ajax и html-формами
-\App\Action::integrateToTemplate();
+Action::integrateToTemplate();
+
+// Загрузка и запуск башен
+Tower::boot();

@@ -141,40 +141,40 @@ hr.big {
 	border-left: 3px solid #aaa;
 	font-weight: normal;
 }
-table#fond {
+table.contentble {
 	border-spacing: 0 5px;
 	width: 100%;
 }
-table#fond tr td {
+table.contentble tr td {
 	padding: 10px 13px;
 	border: 1px solid #eee;
 	border-right: none;
 	margin-top: 5px;
 }
-table#fond tr td:first-child {
+table.contentble tr td:first-child {
 	color: #aaa;
 }
-table#fond tr td:last-child {
+table.contentble tr td:last-child {
 	border-right: 1px solid #eee;
 }
-table#fond thead tr td {
+table.contentble thead tr td {
 	font-weight: bold;
 	border-top: none;
 	border-bottom: none;
 }
-table#fond thead tr td:first-child {
+table.contentble thead tr td:first-child {
 	border-left: none;
 }
-table#fond thead tr td:last-child {
+table.contentble thead tr td:last-child {
 	border-right: none;
 }
-table#fond tbody tr td.dynamic input {
+table.contentble tbody tr td.dynamic input {
 	font-style: italic;
 }
-table#fond tbody tr td.dynamic:hover {
+table.contentble tbody tr td.dynamic:hover {
 	cursor: crosshair;
 }
-table#fond tbody tr td a {
+table.contentble tbody tr td a {
 	text-decoration: none;
 	font-size: 10px;
 	color: #777;
@@ -182,15 +182,15 @@ table#fond tbody tr td a {
 	margin-left: 7px;
 	float: right;
 }
-table#fond tbody tr td a.tool-edit:hover {
+table.contentble tbody tr td a.tool-edit:hover {
 	border-color: #78B009;
 	color: #78B009;
 }
-table#fond tbody tr td a.tool-open:hover {
+table.contentble tbody tr td a.tool-open:hover {
 	border-color: #0981B0;
 	color: #0981B0;
 }
-table#fond tbody tr td a.tool-delete:hover {
+table.contentble tbody tr td a.tool-delete:hover {
 	border-color: #B00909;
 	color: #B00909;
 }

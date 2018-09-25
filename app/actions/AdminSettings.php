@@ -1,7 +1,6 @@
 <?php
 
 namespace Action;
-
 use App\Action;
 
 class Controller extends \App\BaseController {
@@ -37,7 +36,7 @@ class Controller extends \App\BaseController {
 			],
 			'callback' => function(array $data) {
 
-				$settings = new \Things\Settings;
+				$settings = new \Thing\Settings;
 				foreach($data as $key => $value) {
 					$settings->update([ 'value' => $value ], 'WHERE `key` = ?', [ $key ]);
 				}

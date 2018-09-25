@@ -108,28 +108,18 @@ class Router {
 		}
 		require($path);
 		$controller = new \Page\Controller;
-
-		if(method_exists($controller, '__onControllerLoad')) {
-			call_user_func_array([ $controller, '__onControllerLoad' ], []);
+		if(!method_exists($controller, $method)) {
+			throw new EngineException('Неизвестный метод контроллера страницы');
 		}
 
 		require(Explorer::path('controller_static', 'Event'));
-
 		\Event::__onControllerBeforeLoad($_GET['route'], $class, $method);
-		$stopped = false;
-		if(method_exists($controller, '__onPrevent')) {
-			if(!call_user_func_array([ $controller, '__onPrevent' ], [ $_GET['route'], $method ])) {
-				$stopped = true;
-			}
-		}
-		if(!$stopped) {
-			if(!method_exists($controller, $method)) {
-				throw new EngineException('Неизвестный метод контроллера страницы');
-			}
+		if(!method_exists($controller, '__onPrevent') || $controller->__onPrevent($_GET['route'], $method) === true) {
+			// Вызов метода контроллера
 			$result = call_user_func_array([ $controller, $method ], $matches['values']);
 			if($result !== false) {
 				Assets::register();
-				echo App::$template->render($class . '-' . $method . '.tpl', (gettype($result) == 'array' ? $result : []));
+				echo App::$template->render(($controller->view ?? ($class . '-' . $method)) . '.tpl', (is_array($result) ? $result : []));
 			}
 		}
 		\Event::__onControllerAfterLoad($_GET['route'], $class, $method);
@@ -144,7 +134,7 @@ class Router {
 	 * @param string $location - адрес или контроллер страницы
 	 * @return void
 	 */
-	public static function redirect(string $location) : void {
+	public static function go(string $location) : void {
 
 		header('Location: ' . (self::$map[strtolower($location)] ?? $location));
 		exit;

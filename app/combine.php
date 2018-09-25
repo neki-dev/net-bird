@@ -5,9 +5,7 @@
  * Приложение открыто через ./app/combine.php
  */
 
-use App\App;
-use App\Explorer;
-use App\Assets;
+use App\{App,Explorer,Assets};
 
 require($_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php');
 

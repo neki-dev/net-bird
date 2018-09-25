@@ -1,7 +1,6 @@
 <?php
 
-use App\Action;
-use App\App;
+use App\{Action,App};
 
 require($_SERVER['DOCUMENT_ROOT'] . '/app/run-post.php');
 

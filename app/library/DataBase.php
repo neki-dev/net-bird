@@ -3,7 +3,7 @@
 namespace App;
 
 /**
- * netBird/DB
+ * netBird/DataBase
  *
  * Модуль для работы с базой данных
  * 
@@ -12,7 +12,7 @@ namespace App;
  * @copyright Copyright (c) 2013 netBird, Inc
  */
 
-class DB {
+class DataBase {
 	
 	/**
 	 * Префикс таблиц базы данных
@@ -27,6 +27,20 @@ class DB {
 	 * @var PDO
 	 */
 	private $model;
+
+	/**
+	 * Массив методов, поддерживающих расширение
+	 *
+	 * @var array
+	 */
+	private const EXPANSIONS = [
+		'insert',
+		'select',
+		'selectOnce',
+		'delete',
+		'counted',
+		'update'
+	];
 
 	/**
 	 * Подключение к базе данных
@@ -200,6 +214,18 @@ class DB {
 	}
 
 	/**
+	 * Проверка расширяемости метода
+	 * 
+	 * @param string $method - название метода
+	 * @return bool
+	 */
+	public static function isExpansion(string $method) : bool {
+
+		return in_array($method, self::EXPANSIONS);
+
+	}
+
+	/**
 	 * Получение экземпляра PDO
 	 * 
 	 * @return PDO
@@ -207,6 +233,22 @@ class DB {
 	public function pdo() : PDO {
 
 		return $this->model;
+
+	}
+
+	/**
+	 * Выполнение sql-запроса
+	 * 
+	 * @param string $sql - запрос
+	 * @param array $values - массив встраиваемых значений
+	 * @return PDOStatement
+	 */
+	public function sql(string $sql, array $values = []) : \PDOStatement {
+
+		$sql = $this->model->prepare($sql);
+		$sql->execute($values);
+
+		return $sql;
 
 	}
 
@@ -235,8 +277,7 @@ class DB {
 				$mask[] = '?';
 			}
 
-			$sql = $this->model->prepare('INSERT INTO `' . $this->prefix . $table .'` (' . implode($fields, ', ') . ') VALUES (' . implode($mask, ', ') . ')');
-			$sql->execute($values);
+			$this->sql('INSERT INTO `' . $this->prefix . $table .'` (' . implode($fields, ', ') . ') VALUES (' . implode($mask, ', ') . ')', $values);
 
 		}
 
@@ -255,9 +296,7 @@ class DB {
 	 */
 	public function select(string $table, string $fields = '*', string $sql = '', array $values = [], int &$count = NULL) : array {
 
-		$sql = $this->model->prepare('SELECT ' . $fields . ' FROM `' . $this->prefix . $table . '` ' . $sql);
-		$sql->execute($values);
-
+		$sql = $this->sql('SELECT ' . $fields . ' FROM `' . $this->prefix . $table . '` ' . $sql, $values);
 		if(is_int($count)) {
 			$count = $sql->rowCount();
 		}
@@ -276,8 +315,10 @@ class DB {
 	 * @return array
 	 */
 	public function selectOnce(string $table, string $fields = '*', string $sql = '', array $values = []) : ?array {
-
-		return $this->select($table, $fields, $sql . ' LIMIT 1', $values)[0] ?? null;
+		
+		$sql = $this->sql('SELECT ' . $fields . ' FROM `' . $this->prefix . $table . '` ' . $sql . ' LIMIT 1', $values);
+		
+		return $sql->fetchAll()[0] ?? null;
 
 	}
 
@@ -291,8 +332,7 @@ class DB {
 	 */
 	public function delete(string $table, string $sql = '', array $values = []) : void {
 
-		$sql = $this->model->prepare('DELETE FROM `' . $this->prefix . $table . '` ' . $sql);
-		$sql->execute($values);
+		$this->sql('DELETE FROM `' . $this->prefix . $table . '` ' . $sql, $values);
 
 	}
 
@@ -306,8 +346,8 @@ class DB {
 	 */
 	public function counted(string $table, string $sql = '', array $values = []) : int {
 
-		$sql = $this->model->prepare('SELECT COUNT(*) FROM `' . $this->prefix . $table . '` ' . $sql);
-		$sql->execute($values);
+		$sql = $this->sql('SELECT COUNT(*) FROM `' . $this->prefix . $table . '` ' . $sql, $values);
+		
 		return $sql->fetchColumn();
 
 	}
@@ -323,16 +363,14 @@ class DB {
 	 */
 	public function update(string $table, array $data, string $sql = '', array $values = []) : void {
 
-		$params = [];
 		$updates = [];
-
+		$params = [];
 		foreach($data as $key => $value) {
-			$params[] = '`' . $key . '` = ?';
 			$updates[] = $value;
+			$params[] = '`' . $key . '` = ?';
 		}
 
-		$sql = $this->model->prepare('UPDATE `' . $this->prefix . $table . '` SET ' . implode($params, ', ') . $sql);
-		$sql->execute(array_merge($updates, $values));
+		$sql = $this->sql('UPDATE `' . $this->prefix . $table . '` SET ' . implode($params, ', ') . $sql, array_merge($updates, $values));
 
 	}
 

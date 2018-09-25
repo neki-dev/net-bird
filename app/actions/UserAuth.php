@@ -1,9 +1,7 @@
 <?php
 
 namespace Action;
-
-use App\App;
-use App\Action;
+use App\{App,Action};
 
 class Controller extends \App\BaseController {
 
@@ -32,7 +30,7 @@ class Controller extends \App\BaseController {
 			],
 			'callback' => function(array $data) {
 
-				$user = new \Things\User;
+				$user = new \Thing\User;
 
 				if($id = $user->exists($data['username'], $data['password'])) {
 					$user->login($id);
@@ -70,7 +68,7 @@ class Controller extends \App\BaseController {
 			],
 			'callback' => function(array $data) {
 
-				$user = new \Things\User;
+				$user = new \Thing\User;
 
 				if(is_null($user->exists($data['username']))) {
 					$id = $user->register($data['username'], $data['password']);

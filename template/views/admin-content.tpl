@@ -2,14 +2,14 @@
 	title: 'Контент'
 } %}
 <div class='block-title'>Добавление контента</div>
-{{ action('AdminContent@add', {})|raw }}
+{{ action('AdminContent@add')|raw }}
 <hr class='big' />
 <div class='block-title'>Список контента</div>
-<table id="fond"></table>
-<script>
-	fondInit("fond", {
+<table id="content"></table>
+<script type='text/javascript'>
+	$('#content').contentble({
 		type: 'content',
-		data: '{{ fond|raw }}',
+		data: {{ content|raw }},
 		columns: {
 			title: [ "Название", 300 ]
 		},

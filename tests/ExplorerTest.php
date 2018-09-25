@@ -5,6 +5,10 @@ use App\Explorer;
 
 class ExplorerTest extends TestCase {
 
+	public function testPath() {
+		$this->assertEquals('app' . DIRECTORY_SEPARATOR . 'classes' . DIRECTORY_SEPARATOR . 'Explorer.php', Explorer::path('class', 'Explorer'));
+	}
+
 	public function testConfigure() {
 		$this->assertInternalType('array', Explorer::configure());
 	}

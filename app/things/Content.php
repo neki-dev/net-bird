@@ -1,6 +1,6 @@
 <?php
 
-namespace Things;
+namespace Thing;
 
 class Content extends \App\Thing {
 

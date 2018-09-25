@@ -220,3 +220,48 @@ form .input-file a.delete {
 	color: #BF3424;
 	display: none;
 }
+
+#modal {
+	display: none;
+}
+#modal #modal-overlay {
+	position: fixed;
+	z-index: 100;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	background: rgba(0,0,0,0.5);
+}
+#modal .window {
+	width: 380px;
+	height: 360px;
+	background: #fff;
+	position: fixed;
+	left: 50%;
+	top: 50%;
+	margin: -190px 0 0 -180px;
+	z-index: 101;
+	box-shadow: 0 2px 2px rgba(0,0,0,0.4);
+}
+#modal .window .title {
+	padding: 15px 20px;
+	border-bottom: 1px solid #eee;
+	font-weight: bold;
+	text-transform: uppercase;
+}
+#modal .window #modal-close {
+	width: 16px;
+	height: 16px;
+	background: url('/template/images/modal-close.png');
+	float: right;
+	opacity: 0.7;
+	margin: 15px 20px;
+}
+#modal .window #modal-close:hover {
+	cursor: pointer;
+	opacity: 1;
+}
+#modal .window .content {
+	padding: 20px;
+}

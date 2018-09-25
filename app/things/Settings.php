@@ -1,6 +1,6 @@
 <?php
 
-namespace Things;
+namespace Thing;
 
 class Settings extends \App\Thing {
 
@@ -8,7 +8,7 @@ class Settings extends \App\Thing {
 
 	protected $fields = [
 		'key' 	=> [ 'type' => 'varchar(32)', 'uniq' => true ],
-		'value' => [ 'type' => 'varchar(128)' ],
+		'value' => [ 'type' => 'varchar(128)' ]
 	];
 
 	protected function __onCheckout(bool $result) : void {

@@ -1,7 +1,6 @@
 <?php
 
 namespace Action;
-
 use App\Action;
 
 class Controller extends \App\BaseController {
@@ -37,7 +36,7 @@ class Controller extends \App\BaseController {
 
 				$data['postdate'] = time();
 
-				$content = new \Things\Content;
+				$content = new \Thing\Content;
 				$content->insert($data);
 
 				return Action::result(true, 'Контент успешно добавлен', 'admin/content');
@@ -81,7 +80,7 @@ class Controller extends \App\BaseController {
 
 				$data['postdate'] = time();
 
-				$content = new \Things\Content;
+				$content = new \Thing\Content;
 				$content->update($data, 'WHERE id = ?', [ $data['id'] ]);
 				
 				return Action::result(true, 'Контент успешно сохранен', 'admin/content/' . $data['id']);

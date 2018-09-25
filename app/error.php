@@ -24,6 +24,4 @@ App::$template = new \Twig_Environment(
 // Регистрация отладчика
 \App\Debug::handle();
 
-App::$template->addGlobal('_config', App::$config);
-
 \App\Router::error($_GET['code'] ?? 404);

@@ -20,7 +20,6 @@
 
 * Установить [Composer](https://getcomposer.org/)
 * Выполнить команду `php composer create-project essle/netbird`
-  * Или вручную скачать репозиторий и запустить `./install.bat`
 * [Настроить](https://github.com/Essle/netBird/wiki/Настройка) конфигурацию
 
 ## Документация

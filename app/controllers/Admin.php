@@ -1,25 +1,17 @@
 <?php
 
 namespace Page;
-
-use App\Assets;
-use App\Router;
-use App\DB;
-use App\App;
+use App\{Assets,Router,DataBase,App};
 
 class Controller extends \App\BaseController {
 
-	public function __onControllerLoad() : void {
+	public function __onPrevent(string $url, string $method) : bool {
 
 		Assets::add('css', [ 'admin' ]);
 		Assets::add('js', [ 'admin' ]);
 
-	}
-
-	public function __onPrevent(string $url, string $method) : bool {
-
 		if($method != 'login' && empty($_SESSION['admin'])) {
-			Router::redirect('admin@login');
+			Router::go('admin@login');
 			return false;
 		} else {
 			return true;
@@ -37,7 +29,7 @@ class Controller extends \App\BaseController {
 
 		unset($_SESSION['admin']);
 
-		Router::redirect('admin@login');
+		Router::go('admin@login');
 
 		return false;
 
@@ -54,7 +46,10 @@ class Controller extends \App\BaseController {
 	public function content() {
 
 		return [
-			'fond' => (new \Things\Content)->selectEncoded('*', DB::order('id'))
+			'content' => json_encode(
+				(new \Thing\Content)->select('title', DataBase::order('id')), 
+				JSON_NUMERIC_CHECK|JSON_UNESCAPED_UNICODE 
+			)
 		];
 
 	}
@@ -62,7 +57,7 @@ class Controller extends \App\BaseController {
 	public function contentEdit($id) {
 
 		return [
-			'defaultContent' => (new \Things\Content)->selectOnce('*', 'WHERE id = ?', [ $id ])
+			'defaultContent' => (new \Thing\Content)->selectOnce('*', 'WHERE id = ?', [ $id ])
 		];
 
 	}

@@ -18,4 +18,4 @@
 {% if js|length > 0 %}
 	<script type='text/javascript' src='/template/combine.js={{ js|join(",") }}{{ udev() }}'></script>
 {% endif %}
-<link rel='shortcut icon' href='/template/favicon/favicon.ico' />
+<link rel='shortcut icon' href='/template/favicon/favicon.ico?' />

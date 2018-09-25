@@ -1,2 +1,0 @@
-php composer install
-pause

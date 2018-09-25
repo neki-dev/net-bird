@@ -1,2 +1,0 @@
-php composer test
-pause

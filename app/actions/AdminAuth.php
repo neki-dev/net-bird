@@ -1,9 +1,7 @@
 <?php
 
 namespace Action;
-
-use App\App;
-use App\Action;
+use App\{App,Action};
 
 class Controller extends \App\BaseController {
 

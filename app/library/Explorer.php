@@ -20,7 +20,8 @@ class Explorer {
 	 */
 	private const PUBLIC_PATH = [
 		'app/actions',
-		'app/classes/extra',
+		'app/towers',
+		'app/library/extra',
 		'app/things',
 		'app/controllers',
 		'template'
@@ -36,7 +37,8 @@ class Explorer {
 		'application' 		=> 'app',
 		'assets' 			=> 'app/cache/assets/?',
 		'conf_default' 		=> 'app/cache/.conf-default',
-		'class' 			=> 'app/classes/?.php',
+		'tower' 			=> 'app/towers/?.php',
+		'class' 			=> 'app/library/?.php',
 		'views' 			=> 'template/views',
 		'views_cache' 		=> 'app/cache/template',
 		'controller' 		=> 'app/controllers/?.php',

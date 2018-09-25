@@ -21,9 +21,10 @@
     },
     "autoload": {
         "psr-4": {
-            "Things\\": "app/things",
-            "App\\": "app/classes",
-            "Extra\\": "app/classes/extra"
+            "Thing\\": "app/things",
+            "App\\": "app/library",
+            "Extra\\": "app/library/extra",
+            "Tower\\": "app/towers"
         }
     }
 }

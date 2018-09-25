@@ -25,7 +25,7 @@
 {% if js|length > 0 %}
 	<script type='text/javascript' src='/template/combine.js={{ js|join(",") }}{{ udev() }}'></script>
 {% endif %}
-<link rel='shortcut icon' href='/template/favicon/favicon.ico' />
+<link rel='shortcut icon' href='/template/favicon/favicon.ico?' />
 <meta name='apple-mobile-web-app-title' content='RFG' />
 <meta name='msapplication-config' content='/template/favicon/browserconfig.xml' />
 <meta name='theme-color' content='{{ theme ?? "#1f6d87" }}' />

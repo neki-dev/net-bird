@@ -11,4 +11,13 @@ namespace App;
  * @author Essle Jaxcate <me@essle.ru>
  * @copyright Copyright (c) 2013 netBird, Inc
  */
-class BaseController {}
+class BaseController {
+
+	/**
+	 * Перезаписанное представление контроллера
+	 *
+	 * @var string
+	 */
+	public $view = null;
+
+}

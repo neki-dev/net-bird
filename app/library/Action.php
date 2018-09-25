@@ -17,13 +17,12 @@ class Action {
 	 * Генерирование и отображение html-формы
 	 * 
 	 * @param string $actionController - класс и метод контроллера формы
-	 * @param array $params - параметры формы
+	 * @param array $default - значения по умолчанию
 	 * @return string
 	 */
-	public static function render(string $actionController, array $params) : string {
+	public static function render(string $actionController, array $default = []) : string {
 
 		$parser = '';
-		$default = $params['default'] ?? [];
 
 		// Загрузка схемы и коллбэка
 		$action = self::load($actionController);
@@ -171,8 +170,8 @@ class Action {
 	public static function integrateToTemplate() : void {
 
 		App::$template->addFunction(
-			new \Twig_SimpleFunction('action', function(string $form, array $params = []) : string {
-				return Action::render($form, $params);
+			new \Twig_SimpleFunction('action', function(string $form, array $default = []) : string {
+				return Action::render($form, $default);
 			})
 		);
 
