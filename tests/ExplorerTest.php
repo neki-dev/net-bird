@@ -6,7 +6,7 @@ use App\Explorer;
 class ExplorerTest extends TestCase {
 
 	public function testPath() {
-		$this->assertEquals('app' . DIRECTORY_SEPARATOR . 'classes' . DIRECTORY_SEPARATOR . 'Explorer.php', Explorer::path('class', 'Explorer'));
+		$this->assertEquals('app' . DIRECTORY_SEPARATOR . 'library' . DIRECTORY_SEPARATOR . 'Explorer.php', Explorer::path('class', 'Explorer'));
 	}
 
 	public function testConfigure() {
@@ -19,8 +19,8 @@ class ExplorerTest extends TestCase {
 	}
 
 	public function testIsPublicPath() {
-		$this->assertEquals(true, Explorer::isPublicPath('app/classes/extra'));
-		$this->assertEquals(false, Explorer::isPublicPath('app/classes'));
+		$this->assertEquals(true, Explorer::isPublicPath('app/library/extra'));
+		$this->assertEquals(false, Explorer::isPublicPath('app/library'));
 	}
 
 }
