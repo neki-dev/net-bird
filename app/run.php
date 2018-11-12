@@ -13,14 +13,14 @@ use App\{App,Debug,DataBase,CSRF,Explorer,Action,Tower};
 
 require($_SERVER['DOCUMENT_ROOT'] . '/vendor/autoload.php');
 
+// Указание кодировки приложения
+header('Content-type: text/html; charset=utf-8');
+
 // Загрузка конфигурации приложения
 App::$config = Explorer::configure();
 
 // Указание временной зоны
 date_default_timezone_set(App::$config['timezone']);
-
-// Указание кодировки приложения
-header('Content-type: text/html; charset=utf-8');
 
 // Запуск сессии
 session_set_cookie_params(App::$config['session_time']);
@@ -35,9 +35,13 @@ App::$template = new Twig_Environment(
 	]
 );
 
+// Интеграция модулей в шаблонизатор
+foreach([ 'Debug', 'CSRF', 'Action' ] as $module) {
+	('\\App\\' . $module)::integrate();
+}
+
 // Регистрация отладчика
 Debug::handle();
-Debug::integrateToTemplate();
 
 // Загрузка модуля для работы с базой данных
 App::$DB = new DataBase;
@@ -45,10 +49,6 @@ App::$DB->connect(App::$config['database']);
 
 // Загрузка модуля защиты от межсайтовой подделки запросов
 CSRF::start();
-CSRF::integrateToTemplate();
-
-// Загрузка модуля для работы с ajax и html-формами
-Action::integrateToTemplate();
 
 // Загрузка и запуск башен
 Tower::boot();

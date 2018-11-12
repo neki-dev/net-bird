@@ -58,7 +58,7 @@ class CSRF {
 	 * 
 	 * @return void
 	 */
-	public static function integrateToTemplate() : void {
+	public static function integrate() : void {
 
 		App::$template->addFunction(
 			new \Twig_SimpleFunction('csrf_token', function() : string {

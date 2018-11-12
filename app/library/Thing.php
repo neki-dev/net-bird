@@ -28,6 +28,13 @@ abstract class Thing {
 	protected $fields = [];
 	
 	/**
+	 * Уникальный идентификатор записи
+	 *
+	 * @var string
+	 */
+	private $identify = null;
+	
+	/**
 	 * Конструктор вещи
 	 * 
 	 * @return Thing
@@ -36,6 +43,14 @@ abstract class Thing {
 
 		// Проверка базы данных
 		$this->checkout();
+
+		// Поиск уникального идентификатора
+		foreach($this->fields as $key => $value) {
+			if(isset($value['uniq']) && $value['uniq']) {
+				$this->identify = $key;
+				break;
+			}
+		}
 
 	}
 	
@@ -50,6 +65,22 @@ abstract class Thing {
 		$thing = '\\Thing\\' . $thing;
 
 		return new $thing();
+
+	}
+	
+	/**
+	 * Быстрая выборка уникальной записи
+	 * 
+	 * @param mixed $identify - значение идентификатора
+	 * @return array
+	 */
+	public function exact($identify, string $fields = '*') : ?array {
+
+		if(is_null($this->identify)) {
+			throw new EngineException('Отсутствует идентификатор для быстрой выборки (' . get_class($this) . ')');
+		}
+
+		return App::$DB->selectOnce($this->table, $fields, 'WHERE ' . $this->identify . ' = ?', [ $identify ]);
 
 	}
 	

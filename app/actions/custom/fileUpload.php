@@ -1,4 +1,4 @@
-<?php
+<?php # example
 
 use App\{Action,Explorer};
 

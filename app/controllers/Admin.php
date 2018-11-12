@@ -1,4 +1,4 @@
-<?php
+<?php # example
 
 namespace Page;
 use App\{Assets,Router,DataBase,App};
@@ -47,17 +47,17 @@ class Controller extends \App\BaseController {
 
 		return [
 			'content' => json_encode(
-				(new \Thing\Content)->select('title', DataBase::order('id')), 
+				(new \Thing\Content)->select('title,id', DataBase::order('id')), 
 				JSON_NUMERIC_CHECK|JSON_UNESCAPED_UNICODE 
 			)
 		];
 
 	}
 
-	public function contentEdit($id) {
+	public function contentEdit(int $id) {
 
 		return [
-			'defaultContent' => (new \Thing\Content)->selectOnce('*', 'WHERE id = ?', [ $id ])
+			'defaultContent' => (new \Thing\Content)->exact($id)
 		];
 
 	}

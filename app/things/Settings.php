@@ -1,4 +1,4 @@
-<?php
+<?php # example
 
 namespace Thing;
 

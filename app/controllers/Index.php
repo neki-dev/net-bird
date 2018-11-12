@@ -1,4 +1,4 @@
-<?php
+<?php # example
 
 namespace Page;
 use App\Assets;
@@ -14,8 +14,6 @@ class Controller extends \App\BaseController {
 	}
 
 	public function index() {
-
-		//$this->view = 'admin-login';
 
 		return [];
 		

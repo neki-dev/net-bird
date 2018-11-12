@@ -9,11 +9,11 @@
         "email": "me@essle.ru"
     }],
     "require": {
-        "php": ">=7.0.0"
+        "php": ">=7.0.0",
+        "twig/twig": ">=2.5.0",
+        "tedivm/jshrink": "~1.0"
     },
     "require-dev": {
-    	"twig/twig": ">=2.5.0",
-        "tedivm/jshrink": "~1.0",
         "phpunit/phpunit": "^7"
     },
     "scripts": {

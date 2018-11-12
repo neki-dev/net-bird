@@ -402,6 +402,24 @@ class DataBase {
 	}
 
 	/**
+	 * Sql-постфикс лимитирования
+	 * 
+	 * @param mixed $limit - лимит записей
+	 * @param int $offset - индекс начала выборки
+	 * @return string
+	 */
+	public static function limit($limit, int $offset = null) : string {
+
+		if(is_array($limit)) {
+			$offset = $limit[1];
+			$limit = $limit[0];
+		}
+
+		return ' LIMIT ' . (!is_null($offset) ? $limit . ',' . $offset : $limit);
+
+	}
+
+	/**
 	 * Получение реального типа столбца
 	 * 
 	 * @param array $data - локальные данные столбца
@@ -409,7 +427,7 @@ class DataBase {
 	 */
 	private static function getFieldType(array $data) : string {
 
-		if($data['type'] == "ai") {
+		if(strtoupper($data['type']) == 'AI' || strtoupper($data['type']) == 'AUTO_INCREMENT') {
 			return "int(11) NOT NULL AUTO_INCREMENT";
 		} else {
 			return $data['type'] ." NOT NULL" . (isset($data['default']) ? " DEFAULT '" . $data['default'] . "'" : "");

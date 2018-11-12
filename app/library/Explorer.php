@@ -42,7 +42,6 @@ class Explorer {
 		'views' 			=> 'template/views',
 		'views_cache' 		=> 'app/cache/template',
 		'controller' 		=> 'app/controllers/?.php',
-		'controller_static' => 'app/controllers/static/?.php',
 		'action' 			=> 'app/actions/?.php',
 		'action_custom' 	=> 'app/actions/cutsom/__?.php',
 		'debug' 			=> 'app/cache/debug/?.log',

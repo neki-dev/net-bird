@@ -121,7 +121,7 @@ class Debug {
 				}
 			}
 
-			self::log('error', md5($file . '+' . $line . '+' . $errno), $message, $file, $line);
+			self::log('error', $message, $file, $line, md5($file . '+' . $line . '+' . $errno));
 
 			Assets::add('css', [ 'debug', 'debug.parse', 'highlight' ], 'system/');
 			Assets::add('js', [ 'highlight.min' ], 'system/');
@@ -180,7 +180,7 @@ class Debug {
 	 * 
 	 * @return void
 	 */
-	public static function integrateToTemplate() : void {
+	public static function integrate() : void {
 
 		App::$template->addFunction(
 			new \Twig_SimpleFunction('udev', function() : string {
@@ -194,24 +194,17 @@ class Debug {
 	 * Запись информации в логи
 	 * 
 	 * @param string $type - тип лога
-	 * @param string $key - идентификатор
 	 * @param string $message - собщение
-	 * @param string $file - файл
-	 * @param int $line - номер строки
 	 * @return void
 	 */
-	public static function log(string $type, ?string $key, string $message, string $file, ?int $line = null) : void {
-
-		if(is_null($key)) {
-			$key = 'n/a';
-		}
+	public static function log(string $type, string $message, ?string $file = null, ?int $line = null, ?string $key = null) : void {
 
 		$path = Explorer::path('debug', $type . '_' . date('d-m-Y', $_SERVER['REQUEST_TIME']));
 		Explorer::make($path);
 		$temp = fopen($path, 'a+');
 		fwrite($temp, 
-			'[' . $type . '=' . $key . ']' . PHP_EOL .
-			'   > ' . $file . (is_int($line) ? ' :: ' . $line : '') . PHP_EOL .
+			'[' . $type . '=' . ($key ?? 'none') . ']' . PHP_EOL .
+			(is_string($file) ? '   > ' . $file . (is_int($line) ? ' :: ' . $line : '') . PHP_EOL : '') .
 			'   > ' . $message . PHP_EOL .
 			'   > ' . date('d.m.Y H:i', $_SERVER['REQUEST_TIME']) . PHP_EOL .
 			'[/' . $type . ']' . PHP_EOL

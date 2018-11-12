@@ -112,8 +112,6 @@ class Router {
 			throw new EngineException('Неизвестный метод контроллера страницы');
 		}
 
-		require(Explorer::path('controller_static', 'Event'));
-		\Event::__onControllerBeforeLoad($_GET['route'], $class, $method);
 		if(!method_exists($controller, '__onPrevent') || $controller->__onPrevent($_GET['route'], $method) === true) {
 			// Вызов метода контроллера
 			$result = call_user_func_array([ $controller, $method ], $matches['values']);
@@ -122,7 +120,6 @@ class Router {
 				echo App::$template->render(($controller->view ?? ($class . '-' . $method)) . '.tpl', (is_array($result) ? $result : []));
 			}
 		}
-		\Event::__onControllerAfterLoad($_GET['route'], $class, $method);
 		
 		exit;
 

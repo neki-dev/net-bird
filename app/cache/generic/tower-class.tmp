@@ -1,0 +1,12 @@
+<?php
+
+namespace Tower;
+use App\App;
+
+class Tuner {
+
+	public function __construct(bool $isPostMode) {
+		
+	}
+
+}

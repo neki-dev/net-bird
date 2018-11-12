@@ -82,11 +82,16 @@ class Paginator {
 	/**
 	 * Фильтр выборки для sql-запроса
 	 * 
-	 * @return string
+	 * @return array
 	 */
-	public function selection() : string {
+	public function selection() : array {
 
-		return (($this->page - 1) * $this->onPage) . ',' . $this->onPage;
+		return [
+			// Лимит записей
+			$this->onPage,
+			// Индекс начала выборки
+			($this->page - 1) * $this->onPage 
+		];
 
 	}
 		
