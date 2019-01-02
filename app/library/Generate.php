@@ -41,7 +41,7 @@ class Generate {
 		if(!strpos($temp, 'public function ' . $method . '(')) {
 			$temp = str_replace(
 				'#?method-generate', 
-				str_replace([ '%method%', '%args%' ], [ $method, '$' . implode(', $', $args) ], self::source('controller-method')), 
+				str_replace([ '%method%', '%args%' ], [ $method, count($args) > 0 ? '$' . implode(', $', $args) : '' ], self::source('controller-method')), 
 				$temp
 			);
 			file_put_contents($file, $temp);

@@ -117,7 +117,7 @@ class Router {
 			$result = call_user_func_array([ $controller, $method ], $matches['values']);
 			if($result !== false) {
 				Assets::register();
-				echo App::$template->render(($controller->view ?? ($class . '-' . $method)) . '.tpl', (is_array($result) ? $result : []));
+				echo App::$template->render(($controller->view ?? strtolower($class . '-' . $method)) . '.tpl', (is_array($result) ? $result : []));
 			}
 		}
 		

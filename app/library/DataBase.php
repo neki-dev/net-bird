@@ -122,10 +122,10 @@ class DataBase {
 	 * @param array $items - массив локальных данных столбцов
 	 * @return void
 	 */
-	public function createTable(string $name, array $items) : void {
+	public function createTable(string $table, array $items) : void {
 
 		$uniq = false;
-		$sql = 'CREATE TABLE `' . $name . '` (';
+		$sql = 'CREATE TABLE `' . $this->prefix . $table . '` (';
 
 		foreach ($items as $key => $data) {
 			if(isset($data['uniq']) && $data['uniq']) {

@@ -214,7 +214,7 @@ class Action {
 			'redirect' => (!is_null($redirect) && $redirect[0] != '/') ? '/' . $redirect : $redirect
 		];
 
-		if(isset($_SERVER['REQUEST_AJAX'])) {
+		if(isset($_SERVER['REQUEST_AJAX']) && $_SERVER['REQUEST_AJAX']) {
 			header('Content-type: application/json; charset=utf-8');
 			echo json_encode($result, JSON_UNESCAPED_UNICODE);
 			exit;
@@ -243,7 +243,7 @@ class Action {
 			$status = $status['status'];
 		}
 
-		if(isset($_SERVER['REQUEST_AJAX'])) {
+		if(isset($_SERVER['REQUEST_AJAX']) && $_SERVER['REQUEST_AJAX']) {
 			self::result($status, $result);
 		} else {
 			if(!is_null($result)) {
